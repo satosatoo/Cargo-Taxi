@@ -9,22 +9,22 @@ public class Contract {
     public final int contractId;
     LocalDate deliveryDate;
     Cargo cargoC;
-    OrderReceiver orderReceiverC;
+    OrderTaker orderTakerC;
     Driver driverC;
 
     public static List<Contract> contractList = new ArrayList<>();
 
-    Contract(Cargo cargo, OrderReceiver orderReceiver, Driver driver, LocalDate date) {        // ВОЗМОЖНО ДРУГОЙ АТРИБУТ
+    Contract(Cargo cargo, OrderTaker orderTaker, Driver driver, LocalDate date) {        // ВОЗМОЖНО ДРУГОЙ АТРИБУТ
         this.cargoC = cargo;
-        this.orderReceiverC = orderReceiver;
+        this.orderTakerC = orderTaker;
         this.driverC = driver;
         driverC.setInfoFromContract(cargoC.getCargoId(), cargoC.getWeight());
         this.deliveryDate = driverC.deliveryTime(date, cargoC.getWeight(), driverC.getLimitWeight());
         this.contractId = Contract.id++;
     }
 
-    public void createContract(Cargo cargo, OrderReceiver orderReceiver, Driver driver, LocalDate date) {      // ВОЗМОЖНО ДРУГОЙ АТРИБУТ
-        Contract contract = new Contract(cargo, orderReceiver, driver, date);
+    public void createContract(Cargo cargo, OrderTaker orderTaker, Driver driver, LocalDate date) {      // ВОЗМОЖНО ДРУГОЙ АТРИБУТ
+        Contract contract = new Contract(cargo, orderTaker, driver, date);
         Contract.contractList.add(contract);
     }
 
@@ -40,8 +40,8 @@ public class Contract {
 
     public void printInfo() {
         System.out.println("Contract id: " + getContractId() + " |~| Delivery date: " + getDeliveryDate() + " |~| Driver fullname: " + driverC.getFullName() +
-        " |~| Driver id: " + driverC.getId() + " |~| Order receiver fullname: " + orderReceiverC.getFullName() + 
-        " |~| Order receiver id: " + orderReceiverC.getId() + " |~| Cargo name: " + cargoC.getCargoName() + " |~| Cargo id: " + cargoC.getCargoId());
+        " |~| Driver id: " + driverC.getId() + " |~| Order receiver fullname: " + orderTakerC.getFullName() +
+        " |~| Order receiver id: " + orderTakerC.getId() + " |~| Cargo name: " + cargoC.getCargoName() + " |~| Cargo id: " + cargoC.getCargoId());
     }
 
     // Выбор грузов и диспетчеров и водителей
@@ -55,8 +55,8 @@ public class Contract {
         return cargoL;
     }
 
-    public List<OrderReceiver> chooseListOfOrderReceivers() {
-        return OrderReceiver.orderReceiverList;
+    public List<OrderTaker> chooseListOfOrderTakers() {
+        return OrderTaker.orderTakerList;
     }
 
     public List<Driver> chooseListOfDriver() {

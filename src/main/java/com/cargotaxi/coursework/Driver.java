@@ -15,7 +15,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
 
     Driver(String fullName, String phoneNumber) {
         super(fullName, phoneNumber);
-        this.personalId = OrderReceiver.id++;
+        this.personalId = OrderTaker.id++;
         setDriverStatusBoolean(true);
     }
 

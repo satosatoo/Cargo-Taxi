@@ -8,8 +8,8 @@ public class Cargo {
     static int id;
     private int cargoId;
     private String cargoName;
-    private String cargoFrom;
-    private String cargoTo;
+    private String cargoPuckUp;
+    private String cargoDropOff;
     private double price;
     private double weight;
     private boolean cargoStatus;
@@ -17,10 +17,10 @@ public class Cargo {
 
     Cargo(String cargoName, String cargoFrom, String cargoTo, double weight) {
         this.cargoName = cargoName;
-        this.cargoFrom = cargoFrom;
-        this.cargoTo = cargoTo;
+        this.cargoPuckUp = cargoFrom;
+        this.cargoDropOff = cargoTo;
         this.weight = weight;
-        this.cargoId = OrderReceiver.id++;
+        this.cargoId = OrderTaker.id++;
         this.cargoStatus = false;
         cargoPrice();
     }
@@ -51,24 +51,24 @@ public class Cargo {
         setPrice(getWeight() * getPricePerKg());
     }
 
-    // Нужно добавить сюда printInfo
     public void showInfo() {
-        System.out.println("Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoFrom() + " |~| Arrival place: " + getCargoTo() + 
-        " |~| Weight: " + getWeight() + " |~| Cargo status: " + getCargoStatusText() + " |~| Id: " + getCargoId());
+        System.out.println("Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPuckUp() +
+                " |~| Arrival place: " + getCargoDropOff() + " |~| Weight: " + getWeight() +
+                " |~| Cargo status: " + getCargoStatusText() + " |~| Id: " + getCargoId());
     }
     
     // Getters and setters
     public int getCargoId() { return cargoId; }
     public String getCargoName() { return cargoName; }
-    public String getCargoFrom() { return cargoFrom; }
-    public String getCargoTo() { return cargoTo; }
+    public String getCargoPuckUp() { return cargoPuckUp; }
+    public String getCargoDropOff() { return cargoDropOff; }
     public double getPrice() { return price; }
     public double getWeight() { return weight; }
 
     public void setCargoId(int cargoId) { this.cargoId = cargoId; }
     public void setCargoName(String cargoName) { this.cargoName = cargoName; }
-    public void setCargoFrom(String cargoFrom) { this.cargoFrom = cargoFrom; }
-    public void setCargoTo(String cargoTo) { this.cargoTo = cargoTo; }
+    public void setCargoPuckUp(String cargoFrom) { this.cargoPuckUp = cargoFrom; }
+    public void setCargoDropOff(String cargoTo) { this.cargoDropOff = cargoTo; }
     public void setPrice(double price) { this.price = price; }
     public void setWeight(double weight) { this.weight = weight; }
 
