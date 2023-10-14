@@ -43,5 +43,4 @@ public class CargoCreateController {
         stage.setScene(scene);
         stage.show();
     }
-
 }

@@ -14,17 +14,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DriverController implements Initializable {
+public class DriverController {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    @FXML
-    private Text date;
-
-    @FXML
-    private Text time;
 
     @FXML
     void switchToMenu(ActionEvent event) throws IOException {
@@ -51,10 +45,5 @@ public class DriverController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }
