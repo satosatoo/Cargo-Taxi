@@ -1,5 +1,8 @@
 package com.cargotaxi.coursework;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,19 +15,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class MenuController {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    @FXML
-    private Text date;
-
-    @FXML
-    private Text time;
 
     @FXML
     public void switchToCargo(ActionEvent event) throws IOException {
@@ -69,10 +69,5 @@ public class MenuController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

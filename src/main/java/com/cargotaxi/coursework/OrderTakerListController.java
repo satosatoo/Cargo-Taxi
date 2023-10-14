@@ -1,5 +1,7 @@
 package com.cargotaxi.coursework;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,7 @@ public class OrderTakerListController implements Initializable {
     // here must be List and in initialize() add this List
 
     @FXML
-    private ListView<?> listOfOrderTakers;
+    private ListView<OrderTaker> listOfOrderTakers;
 
     @FXML
     void changeOrderTaker(ActionEvent event) throws IOException {
@@ -49,8 +51,12 @@ public class OrderTakerListController implements Initializable {
         stage.show();
     }
 
+    private ObservableList<OrderTaker> orderTakerObservableList;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // Initialize the observable list with your orderTakerList
+        orderTakerObservableList = FXCollections.observableArrayList(OrderTaker.orderTakerList);
+        listOfOrderTakers.setItems(orderTakerObservableList);
     }
 }

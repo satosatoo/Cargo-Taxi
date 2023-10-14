@@ -40,7 +40,7 @@
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <Text layoutX="65.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery date">
+        <Text layoutX="66.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
@@ -48,6 +48,6 @@
       <ChoiceBox fx:id="cargo" layoutX="236.0" layoutY="146.0" prefHeight="25.0" prefWidth="238.0" />
       <ChoiceBox fx:id="orderTaker" layoutX="236.0" layoutY="203.0" prefHeight="25.0" prefWidth="238.0" />
       <ChoiceBox fx:id="driver" layoutX="236.0" layoutY="256.0" prefHeight="25.0" prefWidth="238.0" />
-      <DatePicker fx:id="deliveryDate" disable="true" layoutX="236.0" layoutY="312.0" prefHeight="25.0" prefWidth="238.0" />
+      <DatePicker fx:id="deliveryDate" layoutX="236.0" layoutY="312.0" prefHeight="25.0" prefWidth="238.0" />
     </children>
 </AnchorPane>

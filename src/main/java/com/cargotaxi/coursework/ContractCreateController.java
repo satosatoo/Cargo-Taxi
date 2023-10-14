@@ -3,6 +3,7 @@ package com.cargotaxi.coursework;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,9 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class ContractCreateController {
+public class ContractCreateController implements Initializable {
 
     private Stage stage;
     private Scene scene;
@@ -44,5 +48,17 @@ public class ContractCreateController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        deliveryDate.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                // Запрещает выбор дат, предшествующих сегодняшней дате
+                setDisable(date.isBefore(LocalDate.now()));
+            }
+        });
     }
 }
