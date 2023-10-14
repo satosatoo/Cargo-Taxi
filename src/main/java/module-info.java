@@ -3,6 +3,6 @@ module com.coursework.coursework {
     requires javafx.fxml;
 
 
-    opens com.coursework.coursework to javafx.fxml;
-    exports com.coursework.coursework;
+    opens com.cargotaxi.coursework to javafx.fxml;
+    exports com.cargotaxi.coursework;
 }
