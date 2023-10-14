@@ -28,6 +28,11 @@ public class OrderTakerListController implements Initializable {
 
     @FXML
     void changeOrderTaker(ActionEvent event) throws IOException {
+
+
+        // сделать выбор определенного диспетчера
+
+
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerChangeController.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

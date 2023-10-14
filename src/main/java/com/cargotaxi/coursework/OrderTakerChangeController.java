@@ -39,11 +39,10 @@ public class OrderTakerChangeController {
 
     @FXML
     void switchToOrderTaker(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerController.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerListController.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
 }

@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.cargotaxi.coursework.DriverChangeController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargotaxi.coursework.DriverChangeController">
+    <children>
+        <Button layoutX="166.0" layoutY="403.0" mnemonicParsing="false" onAction="#deleteDriver" prefHeight="43.0" prefWidth="150.0" text="Delete">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Button>
+        <Button layoutX="12.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchToDriver" prefHeight="43.0" prefWidth="150.0" text="Back">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Button>
+        <Label layoutX="145.0" layoutY="54.0" text="Change driver">
+            <font>
+                <Font name="Verdana" size="24.0" />
+            </font>
+        </Label>
+        <Text layoutX="71.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full name">
+            <font>
+                <Font name="Verdana" size="18.0" />
+            </font>
+        </Text>
+        <Text layoutX="50.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number">
+            <font>
+                <Font name="Verdana" size="18.0" />
+            </font>
+        </Text>
+        <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model of car">
+            <font>
+                <Font name="Verdana" size="18.0" />
+            </font>
+        </Text>
+        <TextField fx:id="fullName" disable="true" layoutX="238.0" layoutY="144.0" prefHeight="25.0" prefWidth="235.0" />
+        <TextField fx:id="carNumber" disable="true" layoutX="238.0" layoutY="311.0" prefHeight="25.0" prefWidth="235.0" />
+        <TextField fx:id="phoneNumber" layoutX="238.0" layoutY="201.0" prefHeight="25.0" prefWidth="235.0" />
+        <Button layoutX="319.0" layoutY="403.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="43.0" prefWidth="150.0" text="Save">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Button>
+      <Text layoutX="62.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Car number">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="modelOfCar" layoutX="238.0" layoutY="257.0" prefHeight="25.0" prefWidth="235.0" />
+    </children>
 </AnchorPane>
