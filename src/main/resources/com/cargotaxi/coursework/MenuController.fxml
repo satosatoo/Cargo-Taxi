@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -8,12 +9,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargotaxi.coursework.MenuController">
    <children>
-      <Text fx:id="date" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="600.0">
+      <Text fx:id="date" layoutX="-188.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="600.0">
          <font>
             <Font name="Verdana" size="22.0" />
          </font>
       </Text>
-      <Text fx:id="time" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" wrappingWidth="600.0">
+      <Text fx:id="time" layoutX="-188.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" wrappingWidth="600.0">
          <font>
             <Font name="Verdana" size="24.0" />
          </font>
@@ -43,5 +44,10 @@
             <Font name="Verdana" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="268.0" layoutY="87.0" text="Menu">
+         <font>
+            <Font name="Verdana" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
