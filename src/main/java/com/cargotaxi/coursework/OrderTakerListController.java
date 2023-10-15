@@ -59,8 +59,6 @@ public class OrderTakerListController implements Initializable {
 
     private ObservableList<OrderTaker> orderTakerObservableList;
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize the observable list with your orderTakerList

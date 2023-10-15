@@ -53,7 +53,6 @@ public class OrderTakerChangeController {
             int orderTakerId = selectedOrderTaker.getId();
             OrderTaker.deleteOrderTaker(orderTakerId);
 
-            selectedOrderTaker.setOfficeAddress(officeAddress.getText());
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerListController.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -67,8 +66,8 @@ public class OrderTakerChangeController {
         if (OrderTaker.isValidPhoneNumber(phoneNumber.getText()) && phoneNumber.getText() != null &&
                 OrderTaker.isValidAddress(officeAddress.getText()) && officeAddress.getText() != null) {
             selectedOrderTaker.setPhoneNumber(phoneNumber.getText());
-
             selectedOrderTaker.setOfficeAddress(officeAddress.getText());
+
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerListController.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);

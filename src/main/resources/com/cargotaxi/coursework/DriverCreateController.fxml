@@ -48,6 +48,6 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="modelOfCar" layoutX="238.0" layoutY="257.0" prefHeight="25.0" prefWidth="235.0" />
+      <ChoiceBox fx:id="carModel" layoutX="238.0" layoutY="257.0" prefHeight="25.0" prefWidth="235.0" />
     </children>
 </AnchorPane>

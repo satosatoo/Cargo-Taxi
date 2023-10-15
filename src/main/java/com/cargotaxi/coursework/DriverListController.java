@@ -1,5 +1,7 @@
 package com.cargotaxi.coursework;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
@@ -23,20 +26,25 @@ public class DriverListController implements Initializable {
 
 
     @FXML
-    private ListView<?> listOfDrivers;
+    private ListView<Driver> listOfDrivers;
 
     @FXML
     void switchToDriverChange(ActionEvent event) throws IOException {
-
-
-        // сделать выбор определенного водителя
-
-
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DriverChangeController.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Driver selectedDriver = (Driver) listOfDrivers.getSelectionModel().getSelectedItem();
+        if (selectedDriver != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("DriverChangeController.fxml"));
+                Parent changeRoot = loader.load();
+                DriverChangeController changeController = loader.getController();
+                changeController.setDriver(selectedDriver);
+                Scene changeScene = new Scene(changeRoot);
+                Stage changeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                changeStage.setScene(changeScene);
+                changeStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -48,10 +56,23 @@ public class DriverListController implements Initializable {
         stage.show();
     }
 
-    // here must be List and in initialize() add this List
+    private ObservableList<Driver> driverObservableList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Driver> driverObservableList = FXCollections.observableArrayList(Driver.driverList);
+        listOfDrivers.setItems(driverObservableList);
 
+        listOfDrivers.setCellFactory(param -> new ListCell<Driver>() {
+            @Override
+            protected void updateItem(Driver driver, boolean empty) {
+                super.updateItem(driver, empty);
+                if (empty || driver == null) {
+                    setText(null);
+                } else {
+                    setText(driver.showInfo());
+                }
+            }
+        });
     }
 }

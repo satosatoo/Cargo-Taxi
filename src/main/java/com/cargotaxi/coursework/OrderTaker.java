@@ -16,23 +16,6 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
         this.personalId = OrderTaker.id++;
     }
 
-    public static void createOrderTaker(String fullName, String phoneNumber, String officeAddress) {
-        boolean boo = true;
-        int i = 0;
-        while (boo) {
-            if (OrderTaker.isValidName(fullName)) { i++; continue; }
-            else { OrderTaker.errorName(); }
-            if (OrderTaker.isValidPhoneNumber(phoneNumber)) { i++; continue; }
-            else { OrderTaker.errorPhoneNumber(); }
-            if (OrderTaker.isValidAddress(officeAddress)) { i++; continue; }
-            else { OrderTaker.errorOfficeAddress(); }
-            if (i == 3) { boo = false; }
-            else { i = 0; }
-        }
-        OrderTaker orderTaker = new OrderTaker(fullName, phoneNumber, officeAddress);
-        OrderTaker.orderTakerList.add(orderTaker);
-    }
-
     public static void errorName() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);

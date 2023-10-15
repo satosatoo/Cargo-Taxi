@@ -1,5 +1,7 @@
 package com.cargotaxi.coursework;
 
+import javafx.scene.control.Alert;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,30 +10,93 @@ public class Driver extends Human_Abstract implements Human_Interface {
     public static List<Driver> driverList = new ArrayList<>();
     static int id;
     final private int personalId;
-    private boolean driverStatus;
+    private boolean driverStatus = false;
     private int cargoIdForDriver;
     private double cargoWeightForDriver;
-    Truck truck = new Truck();
+    static Car car = new Car();
 
-    Driver(String fullName, String phoneNumber) {
+    Driver(String fullName, String phoneNumber, String carModel, String carNumber) {
         super(fullName, phoneNumber);
+        car.setCarModel(carModel);
+        car.setCarNumber(carNumber);
         this.personalId = OrderTaker.id++;
-        setDriverStatusBoolean(true);
     }
 
-    public void createDriver(String fullName, String phoneNumber) {
-        Driver driver = new Driver(fullName, phoneNumber);
-        Driver.driverList.add(driver);
+    public static void errorName() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Incorrect full name.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
     }
 
-    public void deleteDriverById(ArrayList<Driver> array, int id) {
-        for (Driver obj : array) {
-            if (obj.getId() == id) {         // zakinut' eto v class Driver
-                if (obj.getDriverStatusBoolean()) {
-                    obj = null;
-                } else {
-                    break;
-                }
+    public static void errorPhoneNumber() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Wrong phone number.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    public static void errorNothingEntered() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Fill in at least one line.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    public static void errorChooseCarModel() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("You need to select a car model.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    // Simple name validation using a regular expression
+    public static boolean isValidName(String name) {
+        // This regex allows letters, spaces, and hyphens, but you can adjust it as needed
+        String regex = "^[A-Za-z\\s\\-]+$";
+        return name.matches(regex);
+    }
+
+    // Simple phone number validation using a regular expression
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        // This regex allows digits and optional hyphens, parentheses, and spaces, but you can adjust it as needed
+        String regex = "^[0-9\\-\\(\\)\\s]+$";
+        return phoneNumber.matches(regex);
+    }
+
+    public static void deleteDriver(int id) {
+        // Найдите водителя по id
+        Driver driverToRemove = null;
+        for (Driver driver : driverList) {
+            if (driver.getId() == id) {
+                driverToRemove = driver;
+                break;
+            }
+        }
+
+        if (driverToRemove != null) {
+            // Проверьте, свободен ли водитель перед удалением
+            if (driverToRemove.getDriverStatusBoolean()) {
+                driverList.remove(driverToRemove);
+            } else {
+                // Водитель занят, выведите сообщение об ошибке или предупреждение
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("The driver is currently busy and cannot be deleted.");
+                alert.showAndWait();
             }
         }
     }
@@ -59,7 +124,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
     public double getCargoWeightForDriver() { return this.cargoWeightForDriver; }
 
     public double getLimitWeight() {
-        return truck.getLimit();
+        return car.getLimit();
     }
 
     public LocalDate deliveryTime(LocalDate date, double weight, double limit) {
@@ -72,12 +137,9 @@ public class Driver extends Human_Abstract implements Human_Interface {
     // Overrided
     @Override
     public String showInfo() {
-        return ("Id: " + getId() + "Full name: " + getFullName() + "  |  Phone number: " + getPhoneNumber() +
-                "  |  Company name: " + getCompanyName() + "  |  Driver status : " + getDriverStatusText() +
-                "  |  Id: " + getId());
-
-        // add info about car!!!!!!!!!!!!!!!!!!!!!!
-
+        return ("Id: " + getId() + "  |  Full name: " + getFullName() + "  |  Phone number: " + getPhoneNumber() +
+                "  |  Company name: " + getCompanyName() + "  |  Model of car : " + car.getCarModel() +
+                "  |  Number of the car : " + car.getCarNumber() + "  |  Driver status : " + getDriverStatusText());
     }
 
     @Override
