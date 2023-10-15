@@ -13,7 +13,7 @@
                 <Font name="Verdana" size="15.0" />
             </font>
         </Button>
-        <ListView fx:id="listOfOrderTakers" layoutX="6.0" layoutY="63.0" prefHeight="320.0" prefWidth="467.0" />
+        <ListView fx:id="listOfCargoes" layoutX="6.0" layoutY="63.0" prefHeight="320.0" prefWidth="467.0" />
         <Label layoutX="152.0" layoutY="20.0" text="List of cargoes">
             <font>
                 <Font name="Verdana" size="24.0" />
