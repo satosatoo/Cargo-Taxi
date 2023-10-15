@@ -7,13 +7,13 @@ import java.util.List;
 public class OrderTaker extends Human_Abstract implements Human_Interface {
     public static List<OrderTaker> orderTakerList = new ArrayList<>();
     static int id;
-    final private int personalId;
+    final private int personalID;
     private String officeAddress;
 
     OrderTaker(String fullName, String phoneNumber, String officeAddress) {
         super(fullName, phoneNumber);
         this.officeAddress = officeAddress;
-        this.personalId = OrderTaker.id++;
+        this.personalID = OrderTaker.id++;
     }
 
     public static void errorName() {
@@ -98,5 +98,5 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setOfficeAddress(String officeAddress) { this.officeAddress = officeAddress; }
 
-    public int getId() { return personalId; }
+    public int getId() { return personalID; }
 }

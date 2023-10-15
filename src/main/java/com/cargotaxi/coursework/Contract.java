@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Contract {
     static int id;
-    public final int contractId;
+    public final int contractID;
     LocalDate appointment;
     LocalDate deliveryDate;
     Cargo cargoC;
@@ -24,7 +24,7 @@ public class Contract {
         driverC.setInfoFromContract(cargoC.getCargoId(), cargoC.getWeight());
         this.appointment = appointment;
         this.deliveryDate = deliveryDate;
-        this.contractId = Contract.id++;
+        this.contractID = Contract.id++;
     }
 
 
@@ -69,14 +69,16 @@ public class Contract {
         alert.showAndWait(); // Show the dialog and wait for the user to close it
     }
 
-    public int getContractId() { return this.contractId; }
+    public int getContractId() { return this.contractID; }
 
     public String showInfo() {
-        return ("Contract id: " + getContractId() + " |~| Delivery date: " + getAppointment() + " |~| Driver fullname: " + driverC.getFullName() +
-        " |~| Driver id: " + driverC.getId() + " |~| Order receiver fullname: " + orderTakerC.getFullName() +
-        " |~| Order receiver id: " + orderTakerC.getId() + " |~| Cargo name: " + cargoC.getCargoName() + " |~| Cargo id: " + cargoC.getCargoId());
+        return ("Contract ID: " + getContractId() + "  |  Appointment: " + getAppointment() +
+                "  |  Delivery date: " + getDeliveryDate() + "  |  Driver ID: " + driverC.getId() +
+                "  |  Order receiver ID: " + orderTakerC.getId() + "  |  Cargo ID: " + cargoC.getCargoId());
     }
 
     public LocalDate getAppointment() { return this.appointment; }
     public void setAppointment(LocalDate date) { this.appointment = date; }
+    public LocalDate getDeliveryDate() { return this.deliveryDate; }
+    public void setDeliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; }
 }

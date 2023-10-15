@@ -9,7 +9,7 @@ import java.util.List;
 public class Driver extends Human_Abstract implements Human_Interface {
     public static List<Driver> driverList = new ArrayList<>();
     static int id;
-    final private int personalId;
+    final int personalID;
     private boolean driverStatus = false;
     private int cargoIdForDriver;
     private double cargoWeightForDriver;
@@ -19,7 +19,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
         super(fullName, phoneNumber);
         car.setCarModel(carModel);
         car.setCarNumber(carNumber);
-        this.personalId = OrderTaker.id++;
+        this.personalID = Driver.id++;
     }
 
     public static void errorName() {
@@ -111,7 +111,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
     }
     public void ifDriverFreeThanNoCargoId() { this.cargoIdForDriver = 0; }
 
-    public int getId() { return personalId; }
+    public int getId() { return personalID; }
     
     public void setDriverStatusBoolean(boolean boo) { this.driverStatus = boo; }
     public boolean getDriverStatusBoolean() { return this.driverStatus; }

@@ -62,7 +62,7 @@ public class CargoCreateController {
     void updatePrice(KeyEvent event) {
         String str = weight.getText();
         double price = Double.parseDouble(str) * Cargo.getPricePerKg();
-        priceText.setText("" + price);
+        priceText.setText(price + "");
     }
 
     @FXML

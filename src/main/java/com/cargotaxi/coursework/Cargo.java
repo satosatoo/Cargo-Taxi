@@ -8,7 +8,7 @@ import java.util.List;
 public class Cargo {
     public static List<Cargo> cargoList = new ArrayList<>();
     static int id;
-    private int cargoId;
+    final int cargoID;
     private String cargoName;
     private String cargoPuckUp;
     private String cargoDropOff;
@@ -23,7 +23,7 @@ public class Cargo {
         this.cargoDropOff = cargoTo;
         this.weight = Double.parseDouble(weight);
         this.price = Double.parseDouble(price);
-        this.cargoId = OrderTaker.id++;
+        this.cargoID = Cargo.id++;
         this.cargoStatus = false;
         cargoPrice();
     }
@@ -133,14 +133,13 @@ public class Cargo {
     }
     
     // Getters and setters
-    public int getCargoId() { return cargoId; }
+    public int getCargoId() { return cargoID; }
     public String getCargoName() { return cargoName; }
     public String getCargoPuckUp() { return cargoPuckUp; }
     public String getCargoDropOff() { return cargoDropOff; }
     public double getPrice() { return price; }
     public double getWeight() { return weight; }
 
-    public void setCargoId(int cargoId) { this.cargoId = cargoId; }
     public void setCargoName(String cargoName) { this.cargoName = cargoName; }
     public void setCargoPuckUp(String cargoFrom) { this.cargoPuckUp = cargoFrom; }
     public void setCargoDropOff(String cargoTo) { this.cargoDropOff = cargoTo; }

@@ -63,7 +63,7 @@ public class ContractCreateController implements Initializable {
             Contract contract = new Contract(cargo.getValue(), orderTaker.getValue(), driver.getValue(), selectedDate, delivery);
             Contract.contractList.add(contract);
 
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DriverController.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ContractController.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
