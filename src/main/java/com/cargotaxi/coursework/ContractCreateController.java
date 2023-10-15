@@ -22,6 +22,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ContractCreateController implements Initializable {
 
@@ -61,6 +62,8 @@ public class ContractCreateController implements Initializable {
 
         if (i == 4) {
             Contract contract = new Contract(cargo.getValue(), orderTaker.getValue(), driver.getValue(), selectedDate, delivery);
+            contract.cargoC.setCargoStatusOnTheWay();
+            contract.driverC.setDriverStatusBusy();
             Contract.contractList.add(contract);
 
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ContractController.fxml")));
@@ -94,9 +97,20 @@ public class ContractCreateController implements Initializable {
         });
 
         // Create ObservableLists for each class
-        ObservableList<Cargo> cargoList = FXCollections.observableArrayList(Cargo.cargoList);
         ObservableList<OrderTaker> orderTakerList = FXCollections.observableArrayList(OrderTaker.orderTakerList);
-        ObservableList<Driver> driverList = FXCollections.observableArrayList(Driver.driverList);
+        ObservableList<Cargo> cargoList = FXCollections.observableArrayList(
+                Cargo.cargoList
+                        .stream()
+                        .filter(Cargo::getCargoStatusBoolean)
+                        .collect(Collectors.toList())
+        );
+
+        ObservableList<Driver> driverList = FXCollections.observableArrayList(
+                Driver.driverList
+                        .stream()
+                        .filter(Driver::getDriverStatusBoolean)
+                        .collect(Collectors.toList())
+        );
 
         // Set the items for each ChoiceBox
         cargo.setItems(cargoList);
@@ -104,19 +118,6 @@ public class ContractCreateController implements Initializable {
         driver.setItems(driverList);
 
         // Customize the display of items in the ChoiceBoxes using a StringConverter
-        cargo.setConverter(new StringConverter<Cargo>() {
-            @Override
-            public String toString(Cargo object) {
-                if (object == null) return null;
-                return "Cargo ID: " + object.getCargoId() + "  -  " + object.getCargoName();
-            }
-
-            @Override
-            public Cargo fromString(String string) {
-                return null;
-            }
-        });
-
         orderTaker.setConverter(new StringConverter<OrderTaker>() {
             @Override
             public String toString(OrderTaker object) {
@@ -126,6 +127,19 @@ public class ContractCreateController implements Initializable {
 
             @Override
             public OrderTaker fromString(String string) {
+                return null;
+            }
+        });
+
+        cargo.setConverter(new StringConverter<Cargo>() {
+            @Override
+            public String toString(Cargo object) {
+                if (object == null) return null;
+                return "Cargo ID: " + object.getCargoId() + "  -  " + object.getCargoName();
+            }
+
+            @Override
+            public Cargo fromString(String string) {
                 return null;
             }
         });

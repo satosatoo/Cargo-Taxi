@@ -10,7 +10,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
     public static List<Driver> driverList = new ArrayList<>();
     static int id;
     final int personalID;
-    private boolean driverStatus = false;
+    private boolean driverStatus = true;
     private int cargoIdForDriver;
     private double cargoWeightForDriver;
     static Car car = new Car();
@@ -107,13 +107,12 @@ public class Driver extends Human_Abstract implements Human_Interface {
     public void setInfoFromContract(int cargoId, double cargoWeight) { 
         setCargoIdForDriver(cargoId);
         setCargoWeightForDriver(cargoWeight);
-        setDriverStatusBoolean(false);
     }
     public void ifDriverFreeThanNoCargoId() { this.cargoIdForDriver = 0; }
 
     public int getId() { return personalID; }
     
-    public void setDriverStatusBoolean(boolean boo) { this.driverStatus = boo; }
+    public void setDriverStatusBusy() { this.driverStatus = false; }
     public boolean getDriverStatusBoolean() { return this.driverStatus; }
     public String getDriverStatusText() {
         if (driverStatus) { return "free"; }

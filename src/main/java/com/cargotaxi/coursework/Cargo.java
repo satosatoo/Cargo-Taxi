@@ -14,7 +14,7 @@ public class Cargo {
     private String cargoDropOff;
     private double price;
     private double weight;
-    private boolean cargoStatus;
+    private boolean cargoStatus = true;
     private static double pricePerKg = 2.5;
 
     Cargo(String cargoName, String cargoFrom, String cargoTo, String weight, String price) {
@@ -24,7 +24,6 @@ public class Cargo {
         this.weight = Double.parseDouble(weight);
         this.price = Double.parseDouble(price);
         this.cargoID = Cargo.id++;
-        this.cargoStatus = false;
         cargoPrice();
     }
 
@@ -147,12 +146,12 @@ public class Cargo {
     public void setWeight(double weight) { this.weight = weight; }
 
     public String getCargoStatusText() {
-        if (cargoStatus) { return "on the way"; }
-        else { return "not processed"; }
+        if (cargoStatus) { return "not processed"; }
+        else { return "on the way"; }
     }
     public boolean getCargoStatusBoolean() {
         return this.cargoStatus;
     }
-    public void setCargoStatusOnTheWay() { this.cargoStatus = true; }
+    public void setCargoStatusOnTheWay() { this.cargoStatus = false; }
     public static double getPricePerKg() { return pricePerKg; }
 }
