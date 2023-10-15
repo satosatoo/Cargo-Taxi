@@ -38,7 +38,13 @@ public class DriverCreateController implements Initializable {
     @FXML
     void saveToList(ActionEvent event) throws IOException {
         int i = 0;
-        if (Driver.isValidName(fullName.getText())) { i++; }
+        if (Driver.isValidName(fullName.getText())) {
+            if (!Driver.isNameAlreadyExists(fullName.getText())) {
+                i++;
+            } else {
+                Driver.errorNameExists();
+            }
+        }
         else { Driver.errorName(); }
         if (Driver.isValidPhoneNumber(phoneNumber.getText())) { i++; }
         else { Driver.errorPhoneNumber(); }

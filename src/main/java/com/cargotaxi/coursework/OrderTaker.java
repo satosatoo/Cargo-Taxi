@@ -96,6 +96,23 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
         }
     }
 
+    public static boolean isNameAlreadyExists(String fullName) {
+        for (OrderTaker orderTaker : orderTakerList) {
+            if (orderTaker.getFullName().equalsIgnoreCase(fullName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void errorNameExists() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("This name already exists. Please enter a different name.");
+        alert.showAndWait();
+    }
+
     // Overrided
     @Override
     public String showInfo() {

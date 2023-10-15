@@ -32,7 +32,13 @@ public class OrderTakerCreateController {
     @FXML
     void saveToList(ActionEvent event) throws IOException {
         int i = 0;
-        if (OrderTaker.isValidName(fullName.getText())) { i++; }
+        if (OrderTaker.isValidName(fullName.getText())) {
+            if (!OrderTaker.isNameAlreadyExists(fullName.getText())) {
+                i++;
+            } else {
+                OrderTaker.errorNameExists();
+            }
+        }
         else { OrderTaker.errorName(); }
         if (OrderTaker.isValidPhoneNumber(phoneNumber.getText())) { i++; }
         else { OrderTaker.errorPhoneNumber(); }
