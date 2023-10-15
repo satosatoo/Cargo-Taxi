@@ -127,7 +127,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
         return car.getLimit();
     }
 
-    public LocalDate deliveryTime(LocalDate date, double weight, double limit) {
+    public static LocalDate deliveryTime(LocalDate date, double weight, double limit) {
         double calc = weight / limit;
         double days = Math.ceil(calc);
         return date.plusDays(Math.round(days));

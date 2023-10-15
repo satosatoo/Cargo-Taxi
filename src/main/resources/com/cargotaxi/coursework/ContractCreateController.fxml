@@ -20,34 +20,44 @@
                 <Font name="Verdana" size="15.0" />
             </font>
         </Button>
-        <Label layoutX="187.0" layoutY="51.0" text="Creation">
+        <Label layoutX="191.0" layoutY="31.0" text="Creation">
             <font>
                 <Font name="Verdana" size="24.0" />
             </font>
         </Label>
-        <Text layoutX="98.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo">
+        <Text layoutX="104.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <Text layoutX="70.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Taker">
+        <Text layoutX="76.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Taker">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <Text layoutX="97.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver">
+        <Text layoutX="103.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <Text layoutX="66.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment">
+        <Text layoutX="72.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-      <ChoiceBox fx:id="cargo" layoutX="236.0" layoutY="146.0" prefHeight="25.0" prefWidth="238.0" />
-      <ChoiceBox fx:id="orderTaker" layoutX="236.0" layoutY="203.0" prefHeight="25.0" prefWidth="238.0" />
-      <ChoiceBox fx:id="driver" layoutX="236.0" layoutY="256.0" prefHeight="25.0" prefWidth="238.0" />
-      <DatePicker fx:id="deliveryDate" layoutX="236.0" layoutY="312.0" prefHeight="25.0" prefWidth="238.0" />
+      <ChoiceBox fx:id="cargo" layoutX="242.0" layoutY="115.0" prefHeight="25.0" prefWidth="231.0" />
+      <ChoiceBox fx:id="orderTaker" layoutX="242.0" layoutY="172.0" prefHeight="25.0" prefWidth="231.0" />
+      <ChoiceBox fx:id="driver" layoutX="242.0" layoutY="225.0" prefHeight="25.0" prefWidth="231.0" />
+      <DatePicker fx:id="appointment" layoutX="242.0" layoutY="281.0" prefHeight="25.0" prefWidth="231.0" />
+      <Text layoutX="69.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery date">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="deliveryDate" layoutX="242.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="231.0">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

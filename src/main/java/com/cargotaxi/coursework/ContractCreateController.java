@@ -1,5 +1,7 @@
 package com.cargotaxi.coursework;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,20 +30,45 @@ public class ContractCreateController implements Initializable {
     private Parent root;
 
     @FXML
-    private ChoiceBox<?> cargo;
+    private Text deliveryDate;
 
     @FXML
-    private DatePicker deliveryDate;
+    private ChoiceBox<Cargo> cargo;
 
     @FXML
-    private ChoiceBox<?> driver;
+    private DatePicker appointment;
 
     @FXML
-    private ChoiceBox<?> orderTaker;
+    private ChoiceBox<Driver> driver;
 
     @FXML
-    void saveToList(ActionEvent event) {
-                                                // realization
+    private ChoiceBox<OrderTaker> orderTaker;
+
+    @FXML
+    void saveToList(ActionEvent event) throws IOException {
+        int i = 0;
+        // Check if any of the ChoiceBox selections are null
+        if (cargo.getValue() != null) { i++; }
+        else { Contract.errorCargo(); }
+        if (orderTaker.getValue() != null) {i++; }
+        else { Contract.errorOrderTaker(); }
+        if (driver.getValue() != null) {i++; }
+        else { Contract.errorDriver(); }
+
+        LocalDate selectedDate = appointment.getValue();
+        if (selectedDate != null && !selectedDate.isBefore(LocalDate.now())) { i++; }
+        else { Contract.errorDate(); }
+
+        if (i == 4) {
+            Contract contract = new Contract(cargo.getValue(), orderTaker.getValue(), driver.getValue(), selectedDate, delivery);
+            Contract.contractList.add(contract);
+
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DriverController.fxml")));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else { i = 0; }
     }
 
     @FXML
@@ -50,14 +80,75 @@ public class ContractCreateController implements Initializable {
         stage.show();
     }
 
+    LocalDate delivery;
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        deliveryDate.setDayCellFactory(picker -> new DateCell() {
+        appointment.setDayCellFactory(picker -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
                 // Запрещает выбор дат, предшествующих сегодняшней дате
                 setDisable(date.isBefore(LocalDate.now()));
+            }
+        });
+
+        // Create ObservableLists for each class
+        ObservableList<Cargo> cargoList = FXCollections.observableArrayList(Cargo.cargoList);
+        ObservableList<OrderTaker> orderTakerList = FXCollections.observableArrayList(OrderTaker.orderTakerList);
+        ObservableList<Driver> driverList = FXCollections.observableArrayList(Driver.driverList);
+
+        // Set the items for each ChoiceBox
+        cargo.setItems(cargoList);
+        orderTaker.setItems(orderTakerList);
+        driver.setItems(driverList);
+
+        // Customize the display of items in the ChoiceBoxes using a StringConverter
+        cargo.setConverter(new StringConverter<Cargo>() {
+            @Override
+            public String toString(Cargo object) {
+                if (object == null) return null;
+                return "Cargo ID: " + object.getCargoId() + "  -  " + object.getCargoName();
+            }
+
+            @Override
+            public Cargo fromString(String string) {
+                return null;
+            }
+        });
+
+        orderTaker.setConverter(new StringConverter<OrderTaker>() {
+            @Override
+            public String toString(OrderTaker object) {
+                if (object == null) return null;
+                return "OrderTaker ID: " + object.getId() + "  -  " + object.getFullName();
+            }
+
+            @Override
+            public OrderTaker fromString(String string) {
+                return null;
+            }
+        });
+
+        driver.setConverter(new StringConverter<Driver>() {
+            @Override
+            public String toString(Driver object) {
+                if (object == null) return null;
+                return "Driver ID: " + object.getId() + "  -  " + object.getFullName();
+            }
+
+            @Override
+            public Driver fromString(String string) {
+                return null;
+            }
+        });
+
+        // Добавьте слушатель событий к DatePicker
+        appointment.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isBefore(LocalDate.now())) {
+                // Получите соответствующую дату доставки
+                delivery = Driver.deliveryTime(newValue, cargo.getValue().getWeight(), Driver.car.getLimit());
+                deliveryDate.setText(delivery.toString());
             }
         });
     }
