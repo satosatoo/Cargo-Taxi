@@ -1,6 +1,10 @@
 package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +83,17 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
 
     public static void deleteOrderTaker(int id) {
         orderTakerList.removeIf(orderTaker -> orderTaker.getId() == id);
+    }
+
+
+    public void saveOrderTaker() {
+        try {
+            FileWriter writer = new FileWriter("orderTakers.txt", true); // 'true' for append mode
+            writer.write(this.getId() + "|" + this.getFullName() + "|" + this.getPhoneNumber() + "|" + this.getOfficeAddress() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Overrided

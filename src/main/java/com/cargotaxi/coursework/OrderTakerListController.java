@@ -13,6 +13,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -23,8 +25,6 @@ public class OrderTakerListController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    // here must be List and in initialize() add this List
 
     @FXML
     private ListView<OrderTaker> listOfOrderTakers;

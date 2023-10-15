@@ -2,6 +2,8 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +132,16 @@ public class Driver extends Human_Abstract implements Human_Interface {
         double calc = weight / limit;
         double days = Math.ceil(calc);
         return date.plusDays(Math.round(days));
+    }
+
+    public void saveDriver() {
+        try {
+            FileWriter writer = new FileWriter("drivers.txt", true); // 'true' for append mode
+            writer.write(this.getId() + "|" + this.getFullName() + "|" + this.getPhoneNumber() + "|" + car.getCarModel() + "|" + car.getCarNumber() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     

@@ -65,6 +65,7 @@ public class ContractCreateController implements Initializable {
             contract.cargoC.setCargoStatusOnTheWay();
             contract.driverC.setDriverStatusBusy();
             Contract.contractList.add(contract);
+            contract.saveContract();
 
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ContractController.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -2,6 +2,8 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,19 @@ public class Contract {
 
         alert.showAndWait(); // Show the dialog and wait for the user to close it
     }
+
+
+    public void saveContract() {
+        try {
+            FileWriter writer = new FileWriter("contracts.txt", true); // 'true' for append mode
+            writer.write(this.getContractId() + "|" + this.getAppointment() + "|" + this.getDeliveryDate() +
+                    "|" + this.cargoC.getCargoId() + "|" + this.driverC.getId() + "|" + this.orderTakerC.getId() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public int getContractId() { return this.contractID; }
 

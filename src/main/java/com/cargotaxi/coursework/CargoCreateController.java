@@ -49,6 +49,7 @@ public class CargoCreateController {
         if (i == 4) {
             Cargo cargo = new Cargo(cargoName.getText(), pickUp.getText(), dropOff.getText(), weight.getText(), priceText.getText());
             Cargo.cargoList.add(cargo);
+            cargo.saveCargo();
 
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CargoController.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public class OrderTakerCreateController {
@@ -37,8 +39,11 @@ public class OrderTakerCreateController {
         if (OrderTaker.isValidAddress(officeAddress.getText())) { i++; }
         else { OrderTaker.errorOfficeAddress(); }
         if (i == 3) {
+            // Create a new OrderTaker object
             OrderTaker orderTaker = new OrderTaker(fullName.getText(), phoneNumber.getText(), officeAddress.getText());
             OrderTaker.orderTakerList.add(orderTaker);
+            // Save the new OrderTaker to the text file
+            orderTaker.saveOrderTaker();
 
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerController.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

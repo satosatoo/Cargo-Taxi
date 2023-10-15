@@ -2,6 +2,8 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class Cargo {
     static int id;
     final int cargoID;
     private String cargoName;
-    private String cargoPuckUp;
+    private String cargoPickUp;
     private String cargoDropOff;
     private double price;
     private double weight;
@@ -19,7 +21,7 @@ public class Cargo {
 
     Cargo(String cargoName, String cargoFrom, String cargoTo, String weight, String price) {
         this.cargoName = cargoName;
-        this.cargoPuckUp = cargoFrom;
+        this.cargoPickUp = cargoFrom;
         this.cargoDropOff = cargoTo;
         this.weight = Double.parseDouble(weight);
         this.price = Double.parseDouble(price);
@@ -102,12 +104,14 @@ public class Cargo {
         }
     }
 
-                // Когда у водителя обновляется статус на свободен то вызывается этот метод и статус груза становится "Delivered"
-    public void cargoDeliveredById(ArrayList<Cargo> array, int id) {
-        for (Cargo obj : array) {
-            if (obj.getCargoId() == id) {
-                obj.setCargoStatusOnTheWay();
-            }
+    public void saveCargo() {
+        try {
+            FileWriter writer = new FileWriter("cargoes.txt", true); // 'true' for append mode
+            writer.write(this.getCargoId() + "|" + this.getCargoName() + "|" + this.getCargoPickUp() +
+                    "|" + this.getCargoDropOff() + "|" + this.getWeight() + "|" + this.getPrice() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -125,7 +129,7 @@ public class Cargo {
     }
 
     public String showInfo() {
-        return ("Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPuckUp() +
+        return ("Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPickUp() +
                 " |~| Arrival place: " + getCargoDropOff() + " |~| Weight: " + getWeight() +
                 " |~| Cargo status: " + getCargoStatusText() + " |~| Price: " + getPrice() +
                 " |~| Id: " + getCargoId());
@@ -134,13 +138,13 @@ public class Cargo {
     // Getters and setters
     public int getCargoId() { return cargoID; }
     public String getCargoName() { return cargoName; }
-    public String getCargoPuckUp() { return cargoPuckUp; }
+    public String getCargoPickUp() { return cargoPickUp; }
     public String getCargoDropOff() { return cargoDropOff; }
     public double getPrice() { return price; }
     public double getWeight() { return weight; }
 
     public void setCargoName(String cargoName) { this.cargoName = cargoName; }
-    public void setCargoPuckUp(String cargoFrom) { this.cargoPuckUp = cargoFrom; }
+    public void setCargoPickUp(String cargoFrom) { this.cargoPickUp = cargoFrom; }
     public void setCargoDropOff(String cargoTo) { this.cargoDropOff = cargoTo; }
     public void setPrice(double price) { this.price = price; }
     public void setWeight(double weight) { this.weight = weight; }

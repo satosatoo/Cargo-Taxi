@@ -48,6 +48,7 @@ public class DriverCreateController implements Initializable {
         if (i == 3) {
             Driver driver = new Driver(fullName.getText(), phoneNumber.getText(), carModel.getValue(), carNumber.getText());
             Driver.driverList.add(driver);
+            driver.saveDriver();
 
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DriverController.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
