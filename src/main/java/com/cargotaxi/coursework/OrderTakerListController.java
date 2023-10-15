@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
@@ -30,16 +31,21 @@ public class OrderTakerListController implements Initializable {
 
     @FXML
     void changeOrderTaker(ActionEvent event) throws IOException {
-
-
-        // сделать выбор определенного диспетчера
-
-
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("OrderTakerChangeController.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        OrderTaker selectedOrderTaker = listOfOrderTakers.getSelectionModel().getSelectedItem();
+        if (selectedOrderTaker != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderTakerChangeController.fxml"));
+                Parent changeRoot = loader.load();
+                OrderTakerChangeController changeController = loader.getController();
+                changeController.setOrderTaker(selectedOrderTaker); // Передайте выбранный объект OrderTaker в следующий контроллер
+                Scene changeScene = new Scene(changeRoot);
+                Stage changeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                changeStage.setScene(changeScene);
+                changeStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -53,10 +59,26 @@ public class OrderTakerListController implements Initializable {
 
     private ObservableList<OrderTaker> orderTakerObservableList;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialize the observable list with your orderTakerList
         orderTakerObservableList = FXCollections.observableArrayList(OrderTaker.orderTakerList);
         listOfOrderTakers.setItems(orderTakerObservableList);
+
+        // Установите фабрику ячеек (cell factory) для отображения информации о каждом объекте в списке
+        listOfOrderTakers.setCellFactory(param -> new ListCell<OrderTaker>() {
+            @Override
+            protected void updateItem(OrderTaker orderTaker, boolean empty) {
+                super.updateItem(orderTaker, empty);
+                if (empty || orderTaker == null) {
+                    setText(null);
+                } else {
+                    // В этой строке можно настроить формат отображения информации
+                    setText(orderTaker.showInfo());
+                }
+            }
+        });
     }
 }

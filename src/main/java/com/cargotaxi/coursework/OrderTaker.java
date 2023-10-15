@@ -1,5 +1,6 @@
 package com.cargotaxi.coursework;
 
+import javafx.scene.control.Alert;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,24 +16,93 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
         this.personalId = OrderTaker.id++;
     }
 
-    public void createOrderTaker(String fullName, String phoneNumber, String officeAddress) {
+    public static void createOrderTaker(String fullName, String phoneNumber, String officeAddress) {
+        boolean boo = true;
+        int i = 0;
+        while (boo) {
+            if (OrderTaker.isValidName(fullName)) { i++; continue; }
+            else { OrderTaker.errorName(); }
+            if (OrderTaker.isValidPhoneNumber(phoneNumber)) { i++; continue; }
+            else { OrderTaker.errorPhoneNumber(); }
+            if (OrderTaker.isValidAddress(officeAddress)) { i++; continue; }
+            else { OrderTaker.errorOfficeAddress(); }
+            if (i == 3) { boo = false; }
+            else { i = 0; }
+        }
         OrderTaker orderTaker = new OrderTaker(fullName, phoneNumber, officeAddress);
         OrderTaker.orderTakerList.add(orderTaker);
     }
 
-    public void deleteOrderTakerById(ArrayList<OrderTaker> array, int id) {
-        for (OrderTaker obj : array) {
-            if (obj.getId() == id) {
-                obj = null;
-            }
-        }
+    public static void errorName() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Incorrect full name.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    public static void errorPhoneNumber() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Wrong phone number.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    public static void errorOfficeAddress() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Incorrect office address.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    public static void errorNothingEntered() {
+        // Display an error message
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setContentText("Fill in at least one line.");
+
+        alert.showAndWait(); // Show the dialog and wait for the user to close it
+    }
+
+    // Simple name validation using a regular expression
+    public static boolean isValidName(String name) {
+        // This regex allows letters, spaces, and hyphens, but you can adjust it as needed
+        String regex = "^[A-Za-z\\s\\-]+$";
+        return name.matches(regex);
+    }
+
+    // Simple phone number validation using a regular expression
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        // This regex allows digits and optional hyphens, parentheses, and spaces, but you can adjust it as needed
+        String regex = "^[0-9\\-\\(\\)\\s]+$";
+        return phoneNumber.matches(regex);
+    }
+
+    // Simple address validation using a regular expression
+    public static boolean isValidAddress(String address) {
+        // This regex allows letters, digits, spaces, commas, and periods, but you can adjust it as needed
+        String regex = "^[A-Za-z0-9\\s,\\.]+$";
+        return address.matches(regex);
+    }
+
+    public static void deleteOrderTaker(int id) {
+        orderTakerList.removeIf(orderTaker -> orderTaker.getId() == id);
     }
 
     // Overrided
     @Override
-    public void showInfo() {
-        System.out.println("Full name: " + getFullName() + " |~| Phone number: " + getPhoneNumber() + " |~| Company name: " + getCompanyName() + 
-        " |~| Office address: " + getOfficeAddress() + " |~| Id: " + getId());
+    public String showInfo() {
+        return ("Id: " + getId() + "  |  Full name: " + getFullName() + "  |  Phone number: " + getPhoneNumber() +
+                "  |  Company name: " + getCompanyName() + "  |  Office address: " + getOfficeAddress());
     }
 
     // Getters and setters

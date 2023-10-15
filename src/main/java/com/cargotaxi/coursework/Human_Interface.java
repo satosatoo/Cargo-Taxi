@@ -8,5 +8,5 @@ interface Human_Interface {
     String getCompanyName();
     void setFullName(String fullName);
     void setPhoneNumber(String phoneNumber);
-    void showInfo();
+    String showInfo();
 }

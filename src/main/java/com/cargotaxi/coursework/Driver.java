@@ -71,9 +71,13 @@ public class Driver extends Human_Abstract implements Human_Interface {
     
     // Overrided
     @Override
-    public void showInfo() {
-        System.out.println("Full name: " + getFullName() + " |~| Phone number: " + getPhoneNumber() + " |~| Company name: " + getCompanyName() + 
-        " |~| Driver status : " + getDriverStatusText() + " |~| Id: " + getId());
+    public String showInfo() {
+        return ("Id: " + getId() + "Full name: " + getFullName() + "  |  Phone number: " + getPhoneNumber() +
+                "  |  Company name: " + getCompanyName() + "  |  Driver status : " + getDriverStatusText() +
+                "  |  Id: " + getId());
+
+        // add info about car!!!!!!!!!!!!!!!!!!!!!!
+
     }
 
     @Override
