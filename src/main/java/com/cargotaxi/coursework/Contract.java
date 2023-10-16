@@ -29,46 +29,44 @@ public class Contract {
         this.contractID = Contract.id++;
     }
 
-
-
     public static void errorCargo() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("To create you must select Cargo.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorOrderTaker() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("to create you must select Order Taker.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorDriver() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("To create you must select Driver.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorDate() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("To create you must select an appointment date.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
 
@@ -84,14 +82,13 @@ public class Contract {
     }
 
 
-    public int getContractId() { return this.contractID; }
-
     public String showInfo() {
         return ("Contract ID: " + getContractId() + "  |  Appointment: " + getAppointment() +
                 "  |  Delivery date: " + getDeliveryDate() + "  |  Driver ID: " + driverC.getId() +
                 "  |  Order receiver ID: " + orderTakerC.getId() + "  |  Cargo ID: " + cargoC.getCargoId());
     }
 
+    public int getContractId() { return this.contractID; }
     public LocalDate getAppointment() { return this.appointment; }
     public void setAppointment(LocalDate date) { this.appointment = date; }
     public LocalDate getDeliveryDate() { return this.deliveryDate; }

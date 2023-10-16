@@ -9,7 +9,6 @@ public class Car {
     private final double limitWeight = 1000;
     private String carModel = null;
 
-    // Добавьте список для хранения сгенерированных номеров машин
     private static List<String> usedCarNumbers = new ArrayList<>();
 
     public String createUniqueCarNumber() {
@@ -34,7 +33,6 @@ public class Car {
         return result;
     }
 
-    // Getters and setters
     public String getCarNumber() { return carNumber; }
     public void setCarNumber(String carNumber) { this.carNumber = carNumber; }
     public String getCarModel() { return carModel; }

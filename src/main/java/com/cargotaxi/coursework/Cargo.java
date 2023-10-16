@@ -33,62 +33,57 @@ public class Cargo {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Incorrect cargo name.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorPickUp() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Incorrect pick up location.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorDropOff() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Incorrect drop off location.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorWeight() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Wrong weight.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorNothingEntered() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Fill in at least one line.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
-    // Simple name validation using a regular expression
     public static boolean isValidCargoName(String name) {
-        // This regex allows letters, spaces, and hyphens, but you can adjust it as needed
         String regex = "^[A-Za-z\\s\\-]+$";
         return name.matches(regex);
     }
 
-    // Simple phone number validation using a regular expression
     public static boolean isValidPickupAndDropOffLocation(String location) {
-        // Customize this regex to match your specific validation criteria
         String regex = "^[A-Za-z0-9\\s,\\.\\-]+$";
         return location.matches(regex);
     }
@@ -97,7 +92,6 @@ public class Cargo {
     public static boolean isValidWeight(String weight) {
         try {
             double parsedWeight = Double.parseDouble(weight);
-            // Customize this range to match your specific validation criteria
             return parsedWeight >= 0;
         } catch (NumberFormatException e) {
             return false;
@@ -112,14 +106,6 @@ public class Cargo {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void deleteCargoById(ArrayList<Cargo> array, int id) {
-        for (Cargo obj : array) {
-            if (obj.getCargoId() == id) {
-                obj = null;
-            }
         }
     }
 
@@ -142,13 +128,11 @@ public class Cargo {
     public String getCargoDropOff() { return cargoDropOff; }
     public double getPrice() { return price; }
     public double getWeight() { return weight; }
-
     public void setCargoName(String cargoName) { this.cargoName = cargoName; }
     public void setCargoPickUp(String cargoFrom) { this.cargoPickUp = cargoFrom; }
     public void setCargoDropOff(String cargoTo) { this.cargoDropOff = cargoTo; }
     public void setPrice(double price) { this.price = price; }
     public void setWeight(double weight) { this.weight = weight; }
-
     public String getCargoStatusText() {
         if (cargoStatus) { return "not processed"; }
         else { return "on the way"; }

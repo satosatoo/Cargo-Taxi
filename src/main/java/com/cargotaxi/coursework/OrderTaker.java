@@ -4,7 +4,6 @@ import javafx.scene.control.Alert;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,59 +23,53 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Incorrect full name.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorPhoneNumber() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Wrong phone number.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorOfficeAddress() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Incorrect office address.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void errorNothingEntered() {
         // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("Fill in at least one line.");
 
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
-    // Simple name validation using a regular expression
     public static boolean isValidName(String name) {
-        // This regex allows letters, spaces, and hyphens, but you can adjust it as needed
         String regex = "^[A-Za-z\\s\\-]+$";
         return name.matches(regex);
     }
 
-    // Simple phone number validation using a regular expression
     public static boolean isValidPhoneNumber(String phoneNumber) {
-        // This regex allows digits and optional hyphens, parentheses, and spaces, but you can adjust it as needed
         String regex = "^[0-9\\-\\(\\)\\s]+$";
         return phoneNumber.matches(regex);
     }
 
-    // Simple address validation using a regular expression
     public static boolean isValidAddress(String address) {
-        // This regex allows letters, digits, spaces, commas, and periods, but you can adjust it as needed
         String regex = "^[A-Za-z0-9\\s,\\.]+$";
         return address.matches(regex);
     }
@@ -113,14 +106,12 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
         alert.showAndWait();
     }
 
-    // Overrided
     @Override
     public String showInfo() {
         return ("Id: " + getId() + "  |  Full name: " + getFullName() + "  |  Phone number: " + getPhoneNumber() +
                 "  |  Company name: " + getCompanyName() + "  |  Office address: " + getOfficeAddress());
     }
 
-    // Getters and setters
     @Override
     public String getCompanyName() { return companyName; }
     public String getFullName() { return fullName; }
