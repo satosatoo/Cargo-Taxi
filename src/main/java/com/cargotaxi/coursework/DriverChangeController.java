@@ -52,6 +52,8 @@ public class DriverChangeController {
             int driverId = selectedDriver.getId();
             Driver.deleteDriver(driverId);
 
+            Driver.deleteDriverFromFile(driverId);
+
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DriverListController.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);

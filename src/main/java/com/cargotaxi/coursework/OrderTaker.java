@@ -1,7 +1,6 @@
 package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -121,6 +120,37 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
             }
         }
         return null;
+    }
+
+    public static void deleteOrderTakerFromFile(int orderTakerId) {
+        try {
+            File inputFile = new File("orderTakers.txt");
+            File tempFile = new File("tempOrderTakers.txt");
+            Scanner scanner = new Scanner(inputFile);
+            FileWriter writer = new FileWriter(tempFile);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+
+                if (data.length >= 1) {
+                    int id = Integer.parseInt(data[0]);
+                    if (id != orderTakerId) {
+                        writer.write(line + "\n");
+                    }
+                }
+            }
+
+            scanner.close();
+            writer.close();
+
+            // Замените исходный файл временным файлом
+            if (inputFile.delete() && !tempFile.renameTo(inputFile)) {
+                System.err.println("Could not rename temp file to original file");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static boolean isNameAlreadyExists(String fullName) {
