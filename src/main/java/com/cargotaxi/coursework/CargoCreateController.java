@@ -46,6 +46,12 @@ public class CargoCreateController {
         else { Cargo.errorDropOff(); }
         if (Cargo.isValidWeight(weight.getText())) { i++; }
         else { Cargo.errorWeight(); }
+
+        if (pickUp.getText().equals(dropOff.getText())) {
+            Cargo.errorIdenticalPickUpAndDropOff();
+            i = 0;
+        }
+
         if (i == 4) {
             Cargo cargo = new Cargo(cargoName.getText(), pickUp.getText(), dropOff.getText(), weight.getText(), priceText.getText());
             Cargo.cargoList.add(cargo);

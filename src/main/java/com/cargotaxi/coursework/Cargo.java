@@ -72,6 +72,15 @@ public class Cargo {
         alert.showAndWait();
     }
 
+    public static void errorIdenticalPickUpAndDropOff() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Pick Up and Drop Off locations cannot be identical.");
+
+        alert.showAndWait();
+    }
+
     public static void errorNothingEntered() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -87,7 +96,7 @@ public class Cargo {
     }
 
     public static boolean isValidPickupAndDropOffLocation(String location) {
-        String regex = "^[A-Za-z0-9\\s,\\.\\-]+$";
+        String regex = "^[\\p{L}0-9,\\s.'-]+,\\s*\\d{1,5}$";
         return location.matches(regex);
     }
 
@@ -95,7 +104,7 @@ public class Cargo {
     public static boolean isValidWeight(String weight) {
         try {
             double parsedWeight = Double.parseDouble(weight);
-            return parsedWeight >= 0;
+            return parsedWeight >= 100;
         } catch (NumberFormatException e) {
             return false;
         }

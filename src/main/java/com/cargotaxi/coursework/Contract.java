@@ -26,7 +26,9 @@ public class Contract {
         this.cargoC = cargo;
         this.orderTakerC = orderTaker;
         this.driverC = driver;
-        driverC.setInfoFromContract(cargoC.getCargoId(), cargoC.getWeight());
+        if (driverC != null) {
+            driverC.setInfoFromContract(cargoC.getCargoId(), cargoC.getWeight());
+        }
         this.appointment = appointment;
         this.deliveryDate = deliveryDate;
         this.contractID = Contract.id++;

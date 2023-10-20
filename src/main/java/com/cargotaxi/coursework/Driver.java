@@ -66,15 +66,53 @@ public class Driver extends Human_Abstract implements Human_Interface {
         alert.showAndWait();
     }
 
-    public static boolean isValidName(String name) {
-        // This regex allows letters, spaces, and hyphens, but you can adjust it as needed
-        String regex = "^[A-Za-z\\s\\-]+$";
-        return name.matches(regex);
+    public static boolean isValidName(String input) {
+        // Разделяем строку на имя и фамилию
+        String[] nameAndSurname = input.split(" ");
+
+        // Проверяем, что после разделения получены две непустые строки
+        if (nameAndSurname.length != 2) {
+            return false;
+        }
+
+        // Проверяем, что есть хотя бы один пробел между именем и фамилией
+        if (!input.contains(" ")) {
+            return false;
+        }
+
+        String name = nameAndSurname[0];
+        String surname = nameAndSurname[1];
+        // Проверка регистра
+        if (!Character.isUpperCase(name.charAt(0)) || !Character.isUpperCase(surname.charAt(0))) {
+            return false;
+        }
+
+        // Проверка длины имени и фамилии
+        if (name.length() < 2 || name.length() > 50) {
+            return false;
+        }
+        if (surname.length() < 2 || surname.length() > 50) {
+            return false;
+        }
+
+        // Проверка символов в имени и фамилии
+        if (!name.matches("^[a-zA-Z'-]*$") || !surname.matches("^[a-zA-Z'-]*$")) {
+            return false;
+        }
+
+        return true;
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
-        String regex = "^[0-9\\-\\(\\)\\s]+$";
-        return phoneNumber.matches(regex);
+        String regex = "^(\\+380|380)[0-9\\-\\(\\)\\s]*[0-9\\-\\(\\)\\s]+$";
+
+        int minPhoneNumberLength = 12; // Минимальная длина номера
+        int maxPhoneNumberLength = 13; // Максимальная длина номера
+
+        if (phoneNumber != null && phoneNumber.matches(regex)) {
+            return phoneNumber.length() == minPhoneNumberLength || phoneNumber.length() == maxPhoneNumberLength;
+        }
+        return false;
     }
 
     public static void deleteDriver(int id) {
@@ -104,6 +142,7 @@ public class Driver extends Human_Abstract implements Human_Interface {
         setCargoIdForDriver(cargoId);
         setCargoWeightForDriver(cargoWeight);
     }
+
     public void ifDriverFreeThanNoCargoId() { this.cargoIdForDriver = 0; }
 
     public static LocalDate deliveryTime(LocalDate date, double weight, double limit) {

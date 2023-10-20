@@ -61,19 +61,58 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
         alert.showAndWait();
     }
 
-    public static boolean isValidName(String name) {
-        String regex = "^[A-Za-z\\s\\-]+$";
-        return name.matches(regex);
+    public static boolean isValidName(String input) {
+        // Разделяем строку на имя и фамилию
+        String[] nameAndSurname = input.split(" ");
+
+        // Проверяем, что после разделения получены две непустые строки
+        if (nameAndSurname.length != 2) {
+            return false;
+        }
+
+        // Проверяем, что есть хотя бы один пробел между именем и фамилией
+        if (!input.contains(" ")) {
+            return false;
+        }
+
+        String name = nameAndSurname[0];
+        String surname = nameAndSurname[1];
+        // Проверка регистра
+        if (!Character.isUpperCase(name.charAt(0)) || !Character.isUpperCase(surname.charAt(0))) {
+            return false;
+        }
+
+        // Проверка длины имени и фамилии
+        if (name.length() < 2 || name.length() > 50) {
+            return false;
+        }
+        if (surname.length() < 2 || surname.length() > 50) {
+            return false;
+        }
+
+        // Проверка символов в имени и фамилии
+        if (!name.matches("^[a-zA-Z'-]*$") || !surname.matches("^[a-zA-Z'-]*$")) {
+            return false;
+        }
+
+        return true;
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
-        String regex = "^[0-9\\-\\(\\)\\s]+$";
-        return phoneNumber.matches(regex);
+        String regex = "^(\\+380|380)[0-9\\-\\(\\)\\s]*[0-9\\-\\(\\)\\s]+$";
+
+        int minPhoneNumberLength = 12; // Минимальная длина номера
+        int maxPhoneNumberLength = 13; // Максимальная длина номера
+
+        if (phoneNumber != null && phoneNumber.matches(regex)) {
+            return phoneNumber.length() == minPhoneNumberLength || phoneNumber.length() == maxPhoneNumberLength;
+        }
+        return false;
     }
 
     public static boolean isValidAddress(String address) {
-        String regex = "^[A-Za-z0-9\\s,\\.]+$";
-        return address.matches(regex);
+        String addressPattern = "^[\\p{L}0-9,\\s.'-]+,\\s*\\d{1,5}$";
+        return address.matches(addressPattern);
     }
 
     public static void deleteOrderTaker(int id) {
@@ -100,11 +139,11 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
                 String line = scanner.nextLine();
                 String[] data = line.split(" ");
 
-                if (data.length >= 5) {
+                if (data.length >= 6) {
                     String id = data[0];
                     String name = data[1] + " " + data[2];
                     String phoneNumber = data[3];
-                    String officeAddress = data[4];
+                    String officeAddress = data[4] + " " + data[5];
                     OrderTaker newobj = new OrderTaker(name, phoneNumber, officeAddress);
                     OrderTaker.orderTakerList.add(newobj);
                 }
