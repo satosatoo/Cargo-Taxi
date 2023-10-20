@@ -2,10 +2,13 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class OrderTaker extends Human_Abstract implements Human_Interface {
     public static List<OrderTaker> orderTakerList = new ArrayList<>();
@@ -82,11 +85,42 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
     public void saveOrderTaker() {
         try {
             FileWriter writer = new FileWriter("orderTakers.txt", true); // 'true' for append mode
-            writer.write(this.getId() + "|" + this.getFullName() + "|" + this.getPhoneNumber() + "|" + this.getOfficeAddress() + "\n");
+            writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() + " " + this.getOfficeAddress() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void readOrderTaker() {
+        try {
+            File file = new File("orderTakers.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+
+                if (data.length >= 5) {
+                    String id = data[0];
+                    String name = data[1] + " " + data[2];
+                    String phoneNumber = data[3];
+                    String officeAddress = data[4];
+                    OrderTaker newobj = new OrderTaker(name, phoneNumber, officeAddress);
+                    OrderTaker.orderTakerList.add(newobj);
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) { e.printStackTrace(); }
+    }
+
+    public static OrderTaker findOrderTakerById(int id) {
+        for (OrderTaker orderTaker : orderTakerList) {
+            if (orderTaker.getId() == id) {
+                return orderTaker;
+            }
+        }
+        return null;
     }
 
     public static boolean isNameAlreadyExists(String fullName) {

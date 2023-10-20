@@ -2,11 +2,14 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Contract {
     static int id;
@@ -73,12 +76,40 @@ public class Contract {
     public void saveContract() {
         try {
             FileWriter writer = new FileWriter("contracts.txt", true); // 'true' for append mode
-            writer.write(this.getContractId() + "|" + this.getAppointment() + "|" + this.getDeliveryDate() +
-                    "|" + this.cargoC.getCargoId() + "|" + this.driverC.getId() + "|" + this.orderTakerC.getId() + "\n");
+            writer.write(this.getContractId() + " " + this.getAppointment() + " " + this.getDeliveryDate() +
+                    " " + this.cargoC.getCargoId() + " " + this.driverC.getId() + " " + this.orderTakerC.getId() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void readContract() {
+        try {
+            File file = new File("contracts.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+
+                if (data.length >= 6) {
+                    String id = data[0];
+                    LocalDate appointment = LocalDate.parse(data[1]);
+                    LocalDate deliveryDate = LocalDate.parse(data[2]);
+                    String cargoID = data[3];
+                    String driverID = data[4];
+                    String orderTakerID = data[5];
+                    Contract newobj = new Contract(Cargo.findCargoById(Integer.parseInt(cargoID)),
+                            OrderTaker.findOrderTakerById(Integer.parseInt(orderTakerID)),
+                            Driver.findDriverById(Integer.parseInt(driverID)),
+                            appointment,
+                            deliveryDate);
+                    Contract.contractList.add(newobj);
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) { e.printStackTrace(); }
     }
 
 

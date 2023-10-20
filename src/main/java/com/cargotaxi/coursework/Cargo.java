@@ -2,10 +2,13 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Cargo {
     public static List<Cargo> cargoList = new ArrayList<>();
@@ -101,12 +104,45 @@ public class Cargo {
     public void saveCargo() {
         try {
             FileWriter writer = new FileWriter("cargoes.txt", true); // 'true' for append mode
-            writer.write(this.getCargoId() + "|" + this.getCargoName() + "|" + this.getCargoPickUp() +
-                    "|" + this.getCargoDropOff() + "|" + this.getWeight() + "|" + this.getPrice() + "\n");
+            writer.write(this.getCargoId() + " " + this.getCargoName() + " " + this.getCargoPickUp() +
+                    " " + this.getCargoDropOff() + " " + this.getWeight() + " " + this.getPrice() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void readCargo() {
+        try {
+            File file = new File("cargoes.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+
+                if (data.length >= 6) {
+                    String id = data[0];
+                    String name = data[1];
+                    String pickUp = data[2];
+                    String dropOff = data[3];
+                    String weight = data[4];
+                    String price = data[5];
+                    Cargo newobj = new Cargo(name, pickUp, dropOff, weight, price);
+                    Cargo.cargoList.add(newobj);
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) { e.printStackTrace(); }
+    }
+
+    public static Cargo findCargoById(int id) {
+        for (Cargo cargo : cargoList) {
+            if (cargo.getCargoId() == id) {
+                return cargo;
+            }
+        }
+        return null;
     }
 
     public double cargoPrice() {

@@ -2,11 +2,14 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Driver extends Human_Abstract implements Human_Interface {
     public static List<Driver> driverList = new ArrayList<>();
@@ -129,11 +132,43 @@ public class Driver extends Human_Abstract implements Human_Interface {
     public void saveDriver() {
         try {
             FileWriter writer = new FileWriter("drivers.txt", true); // 'true' for append mode
-            writer.write(this.getId() + "|" + this.getFullName() + "|" + this.getPhoneNumber() + "|" + car.getCarModel() + "|" + car.getCarNumber() + "\n");
+            writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() + " " + car.getCarModel() + " " + car.getCarNumber() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void readDriver() {
+        try {
+            File file = new File("drivers.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+
+                if (data.length >= 6) {
+                    String id = data[0];
+                    String name = data[1] + " " + data[2];
+                    String phoneNumber = data[3];
+                    String carModel = data[4];
+                    String carNumber = data[5];
+                    Driver newobj = new Driver(name, phoneNumber, carModel, carNumber);
+                    Driver.driverList.add(newobj);
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) { e.printStackTrace(); }
+    }
+
+    public static Driver findDriverById(int id) {
+        for (Driver driver : driverList) {
+            if (driver.getId() == id) {
+                return driver;
+            }
+        }
+        return null;
     }
 
 
