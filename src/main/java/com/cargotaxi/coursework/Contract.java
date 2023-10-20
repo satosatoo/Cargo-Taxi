@@ -114,6 +114,15 @@ public class Contract {
         } catch (FileNotFoundException e) { e.printStackTrace(); }
     }
 
+    public static Contract findContractById(int id) {
+        for (Contract contract : contractList) {
+            if (contract.getID() == id) {
+                return contract;
+            }
+        }
+        return null;
+    }
+
 
     public String showInfo() {
         return ("Contract ID: " + getContractId() + "  |  Appointment: " + getAppointment() +
@@ -126,4 +135,5 @@ public class Contract {
     public void setAppointment(LocalDate date) { this.appointment = date; }
     public LocalDate getDeliveryDate() { return this.deliveryDate; }
     public void setDeliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; }
+    public int getID() { return this.contractID; }
 }

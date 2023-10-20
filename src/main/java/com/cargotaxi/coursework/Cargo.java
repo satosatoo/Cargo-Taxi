@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Cargo {
     public static List<Cargo> cargoList = new ArrayList<>();
     static int id;
-    final int cargoID;
+    private final int cargoID;
     private String cargoName;
     private String cargoPickUp;
     private String cargoDropOff;
@@ -26,9 +26,12 @@ public class Cargo {
         this.cargoName = cargoName;
         this.cargoPickUp = cargoFrom;
         this.cargoDropOff = cargoTo;
-        this.weight = Double.parseDouble(weight);
-        this.price = Double.parseDouble(price);
+        try {
+            this.weight = Double.parseDouble(weight);
+        } catch (NumberFormatException e) {
+        }
         this.cargoID = Cargo.id++;
+        this.price = Double.parseDouble(price);
         cargoPrice();
     }
 
@@ -130,13 +133,13 @@ public class Cargo {
                 String line = scanner.nextLine();
                 String[] data = line.split(" ");
 
-                if (data.length >= 6) {
+                if (data.length >= 8) {
                     String id = data[0];
                     String name = data[1];
-                    String pickUp = data[2];
-                    String dropOff = data[3];
-                    String weight = data[4];
-                    String price = data[5];
+                    String pickUp = data[2] + " " + data[3];
+                    String dropOff = data[4] + " " + data[5];
+                    String weight = data[6];
+                    String price = data[7];
                     Cargo newobj = new Cargo(name, pickUp, dropOff, weight, price);
                     Cargo.cargoList.add(newobj);
                 }

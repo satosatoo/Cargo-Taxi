@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 public class RequestsController implements Initializable {
 
@@ -23,61 +25,48 @@ public class RequestsController implements Initializable {
     private Parent root;
 
     @FXML
+    private ComboBox<String> selectMonth;
+
+    @FXML
+    private ComboBox<String> selectYear;
+
+    @FXML
     private DatePicker specificDate;
 
     @FXML
     void averageCost(ActionEvent event) {
-        double sum = 0;
-        int i = 0;
-        double average = 0;
-        for (Cargo cargo: Cargo.cargoList) {
-            sum += cargo.getPrice();
-            i++;
+        String selectedMonth = selectMonth.getValue();
+        String selectedYear = selectYear.getValue();
+        try {
+            Requests.averageCost(selectedMonth, selectedYear);
+        } catch (DataNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
-        average = sum / i;
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText(null); // You can set a custom header text if needed
-        alert.setContentText("The average cost of the service: " + average);
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
     }
 
     @FXML
     void heaviestTransportation(ActionEvent event) {
-        Cargo result = null;
-        double heaviest = Cargo.cargoList.get(0).getWeight();
-        for (int i = 1; i < Cargo.cargoList.size(); i++) {
-            if (heaviest < Cargo.cargoList.get(i).getWeight()) {
-                heaviest = Cargo.cargoList.get(i).getWeight();
-                result = Cargo.cargoList.get(i);
-            }
+        String selectedMonth = selectMonth.getValue();
+        String selectedYear = selectYear.getValue();
+        try {
+            Requests.heaviestTransportation(selectedMonth, selectedYear);
+        } catch (DataNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
-
-        // Display an error message
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText(null); // You can set a custom header text if needed
-        alert.setContentText("The heaviest transportation: " + heaviest + "\n" +
-                "Cargo name: " + result.getCargoName() + " | Cargo ID: " + result.getCargoId());
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
     }
 
     @FXML
     void numOfCargoForSpecificDate(ActionEvent event) {
-        int u = 0;
-        LocalDate selectedDate = specificDate.getValue();
-        for (Contract cont: Contract.contractList) {
-            if (cont.getDeliveryDate().isEqual(selectedDate)) {
-                u++;
-            }
-        }
-        // Display an error message
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText(null); // You can set a custom header text if needed
-        alert.setContentText("The number of clients to whom the service is assigned for the specified period: " + u);
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        LocalDate sd = specificDate.getValue();
+        Requests.numOfCargoForSpecificDate(sd);
     }
 
     @FXML
@@ -99,5 +88,9 @@ public class RequestsController implements Initializable {
                 setDisable(date.isBefore(LocalDate.now()));
             }
         });
+
+        selectMonth.getItems().addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+        selectYear.getItems().addAll("2023", "2024", "2025", "2026");
     }
 }
