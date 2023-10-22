@@ -1,7 +1,6 @@
 package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,7 +10,6 @@ public class Requests {
         int i = 0;
         double average = 0;
         for (Cargo cargo: Cargo.cargoList) {
-            // Добавьте условие для фильтрации по выбранному месяцу и году
             LocalDate cargoDate = Objects.requireNonNull(Contract.findContractById(cargo.getCargoId())).getDeliveryDate();
             if (cargoDate.getMonth().name().equalsIgnoreCase(selectedMonth) && cargoDate.getYear() == Integer.parseInt(selectedYear)) {
                 sum += cargo.getPrice();
@@ -27,9 +25,9 @@ public class Requests {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("The average cost of the service for " + selectedMonth + " " + selectedYear + ": " + average);
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void heaviestTransportation(String selectedMonth, String selectedYear) throws DataNotFoundException {
@@ -49,13 +47,12 @@ public class Requests {
             throw new DataNotFoundException("No data found for the heaviest transportation in " + selectedMonth + " " + selectedYear);
         }
 
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("The heaviest transportation in " + selectedMonth + " " + selectedYear + ": " + heaviest + "\n" +
                 "Cargo name: " + result.getCargoName() + " | Cargo ID: " + result.getCargoId());
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 
     public static void numOfCargoForSpecificDate(LocalDate specificDate) {
@@ -66,12 +63,12 @@ public class Requests {
                 u++;
             }
         }
-        // Display an error message
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
-        alert.setHeaderText(null); // You can set a custom header text if needed
+        alert.setHeaderText(null);
         alert.setContentText("The number of clients to whom the service is assigned for the specified period: " + u);
-        alert.showAndWait(); // Show the dialog and wait for the user to close it
+        alert.showAndWait();
     }
 }
 
