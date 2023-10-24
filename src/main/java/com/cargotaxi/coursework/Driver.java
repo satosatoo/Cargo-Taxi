@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Driver extends Human_Abstract implements Human_Interface {
+public class Driver extends Human_Abstract {
     public static List<Driver> driverList = new ArrayList<>();
     static int id;
     final int personalID;
@@ -116,7 +116,6 @@ public class Driver extends Human_Abstract implements Human_Interface {
     }
 
     public static void deleteDriver(int id) {
-        // Найдите водителя по id
         Driver driverToRemove = null;
         for (Driver driver : driverList) {
             if (driver.getId() == id) {
@@ -232,7 +231,6 @@ public class Driver extends Human_Abstract implements Human_Interface {
             scanner.close();
             writer.close();
 
-            // Замените исходный файл временным файлом
             if (inputFile.delete() && !tempFile.renameTo(inputFile)) {
                 System.err.println("Could not rename temp file to original file");
             }

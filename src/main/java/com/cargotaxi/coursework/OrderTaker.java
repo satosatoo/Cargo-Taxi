@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class OrderTaker extends Human_Abstract implements Human_Interface {
+public class OrderTaker extends Human_Abstract {
     public static List<OrderTaker> orderTakerList = new ArrayList<>();
     static int id;
     final private int personalID;
@@ -219,10 +219,10 @@ public class OrderTaker extends Human_Abstract implements Human_Interface {
     public String getCompanyName() { return companyName; }
     public String getFullName() { return fullName; }
     public String getPhoneNumber() { return phoneNumber; }
-    public String getOfficeAddress() { return officeAddress; }
     public void setFullName(String fullName) { this.fullName = fullName; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-    public void setOfficeAddress(String officeAddress) { this.officeAddress = officeAddress; }
 
     public int getId() { return personalID; }
+    public void setOfficeAddress(String officeAddress) { this.officeAddress = officeAddress; }
+    public String getOfficeAddress() { return officeAddress; }
 }

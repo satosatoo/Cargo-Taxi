@@ -2,7 +2,6 @@ package com.cargotaxi.coursework;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
