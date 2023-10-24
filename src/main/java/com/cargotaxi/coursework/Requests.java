@@ -50,7 +50,7 @@ public class Requests {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(null);
-        alert.setContentText("The heaviest transportation in " + selectedMonth + " " + selectedYear + ": " + heaviest + "\n" +
+        alert.setContentText("The heaviest transportation in " + selectedMonth + " " + selectedYear + ": " + heaviest + " kg.\n" +
                 "Cargo name: " + result.getCargoName() + " | Cargo ID: " + result.getCargoId());
         alert.showAndWait();
     }

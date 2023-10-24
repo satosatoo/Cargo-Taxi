@@ -1,11 +1,11 @@
 package com.cargotaxi.coursework;
 
-abstract class Human_Abstract {
+abstract class Human {
     String fullName;
     String phoneNumber;
     String companyName = "ACV";
 
-    Human_Abstract(String fullName, String phoneNumber) {
+    Human(String fullName, String phoneNumber) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
     }

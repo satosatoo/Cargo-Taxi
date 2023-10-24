@@ -40,9 +40,9 @@
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <TextField fx:id="fullName" layoutX="238.0" layoutY="144.0" prefHeight="25.0" prefWidth="235.0" />
+        <TextField fx:id="fullName" layoutX="238.0" layoutY="144.0" prefHeight="25.0" prefWidth="235.0" promptText="Full Name" />
         <TextField fx:id="carNumber" disable="true" layoutX="238.0" layoutY="309.0" prefHeight="25.0" prefWidth="235.0" />
-        <TextField fx:id="phoneNumber" layoutX="238.0" layoutY="201.0" prefHeight="25.0" prefWidth="235.0" />
+        <TextField fx:id="phoneNumber" layoutX="238.0" layoutY="201.0" prefHeight="25.0" prefWidth="235.0" promptText="+380123456789" />
       <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model of car">
          <font>
             <Font name="Verdana" size="18.0" />

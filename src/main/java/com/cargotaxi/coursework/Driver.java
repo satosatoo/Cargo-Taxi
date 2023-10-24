@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Driver extends Human_Abstract {
+public class Driver extends Human {
     public static List<Driver> driverList = new ArrayList<>();
     static int id;
     final int personalID;

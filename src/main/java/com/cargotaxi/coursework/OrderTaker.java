@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class OrderTaker extends Human_Abstract {
+public class OrderTaker extends Human {
     public static List<OrderTaker> orderTakerList = new ArrayList<>();
     static int id;
     final private int personalID;
@@ -111,8 +113,23 @@ public class OrderTaker extends Human_Abstract {
     }
 
     public static boolean isValidAddress(String address) {
-        String addressPattern = "^[\\p{L}0-9,\\s.'-]+,\\s*\\d{1,5}$";
-        return address.matches(addressPattern);
+        String addressPattern = "^(\\p{L}+),\\s*(\\p{L}+),\\s*(\\d{1,5})$";
+        Pattern pattern = Pattern.compile(addressPattern);
+        Matcher matcher = pattern.matcher(address);
+
+        if (matcher.matches()) {
+            String city = matcher.group(1);
+            String street = matcher.group(2);
+            String streetNumber = matcher.group(3);
+
+            // Дальнейшая обработка city, street и streetNumber
+            // Например, можно добавить дополнительные проверки
+            // или возвратить true, если все условия выполняются.
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void deleteOrderTaker(int id) {

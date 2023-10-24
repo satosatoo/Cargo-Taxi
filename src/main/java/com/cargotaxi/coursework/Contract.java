@@ -123,6 +123,16 @@ public class Contract {
         return null;
     }
 
+    public static List<String> getYearsFromData() {
+        List<String> years = new ArrayList<>();
+        for (Contract contract : Contract.contractList) {
+            String year = String.valueOf(contract.getAppointment().getYear());
+            if (!years.contains(year)) {
+                years.add(year);
+            }
+        }
+        return years;
+    }
 
     public String showInfo() {
         return ("Contract ID: " + getContractId() + "  |  Appointment: " + getAppointment() +

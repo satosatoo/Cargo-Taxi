@@ -14,12 +14,25 @@
             <Font name="Verdana" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="134.0" layoutY="160.0" mnemonicParsing="false" onAction="#numOfCargoForSpecificDate" prefHeight="30.0" prefWidth="332.0" text="The number of cargoes to which the service is assigned" />
-      <Button layoutX="95.0" layoutY="286.0" mnemonicParsing="false" onAction="#heaviestTransportation" prefHeight="30.0" prefWidth="205.0" text="The heaviest transportation" />
-      <DatePicker fx:id="specificDate" layoutX="216.0" layoutY="135.0" />
-      <Button layoutX="304.0" layoutY="286.0" mnemonicParsing="false" onAction="#averageCost" prefHeight="30.0" prefWidth="205.0" text="The average cost of the service" />
-      <Button layoutX="202.0" layoutY="348.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="30.0" prefWidth="205.0" text="Back" />
-      <ComboBox fx:id="selectYear" layoutX="229.0" layoutY="222.0" prefWidth="150.0" promptText="Select year" />
-      <ComboBox fx:id="selectMonth" layoutX="229.0" layoutY="247.0" prefWidth="150.0" promptText="Select month" />
+      <Button layoutX="198.0" layoutY="404.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="30.0" prefWidth="205.0" text="Back" />
+      <AnchorPane layoutY="175.0" prefHeight="111.0" prefWidth="600.0" style="-fx-background-color: #b8a5a9">
+         <children>
+            <Button layoutX="82.0" layoutY="71.0" mnemonicParsing="false" onAction="#heaviestTransportation" prefHeight="30.0" prefWidth="205.0" text="The heaviest transportation" />
+            <Button layoutX="311.0" layoutY="71.0" mnemonicParsing="false" onAction="#averageCost" prefHeight="30.0" prefWidth="205.0" text="The average cost of the service" />
+            <ComboBox fx:id="selectYear" layoutX="225.0" layoutY="14.0" prefWidth="150.0" promptText="Select year" />
+            <ComboBox fx:id="selectMonth" layoutX="225.0" layoutY="39.0" prefWidth="150.0" promptText="Select month" />
+         </children></AnchorPane>
+      <AnchorPane layoutY="99.0" prefHeight="76.0" prefWidth="600.0" style="-fx-background-color: #a5b8b3">
+         <children>
+            <DatePicker fx:id="specificDate" layoutX="213.0" layoutY="9.0" prefWidth="174.0" />
+            <Button layoutX="134.0" layoutY="34.0" mnemonicParsing="false" onAction="#numOfCargoForSpecificDate" prefHeight="30.0" prefWidth="332.0" text="The number of cargoes to which the service is assigned" />
+         </children></AnchorPane>
+      <AnchorPane layoutY="286.0" prefHeight="76.0" prefWidth="600.0" style="-fx-background-color: #aba5b8">
+         <children>
+            <Button layoutX="454.0" layoutY="26.0" mnemonicParsing="false" onAction="#switchToContractsList" prefHeight="25.0" prefWidth="132.0" text="List of contracts" />
+            <Button layoutX="311.0" layoutY="26.0" mnemonicParsing="false" onAction="#switchToCargoesList" prefHeight="25.0" prefWidth="132.0" text="List of cargoes" />
+            <Button layoutX="155.0" layoutY="26.0" mnemonicParsing="false" onAction="#switchToDriversList" prefHeight="25.0" prefWidth="132.0" text="List of drivers" />
+            <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#switchToOrderTakerList" prefHeight="25.0" prefWidth="132.0" text="List of order takers" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

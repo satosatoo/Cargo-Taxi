@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 public class RequestsController implements Initializable {
 
@@ -78,19 +78,58 @@ public class RequestsController implements Initializable {
         stage.show();
     }
 
+
+    @FXML
+    void switchToCargoesList(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("CargoDetailsController.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void switchToContractsList(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("ContractDetailsController.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void switchToDriversList(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("DriverDetailsController.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void switchToOrderTakerList(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("OrderTakerDetailsController.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         specificDate.setDayCellFactory(picker -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                // Запрещает выбор дат, предшествующих сегодняшней дате
+                // Disallow selection of dates before today
                 setDisable(date.isBefore(LocalDate.now()));
             }
         });
 
         selectMonth.getItems().addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
-        selectYear.getItems().addAll("2023", "2024", "2025", "2026");
+        List<String> years = Contract.getYearsFromData();
+        selectYear.getItems().addAll(years);
     }
 }
