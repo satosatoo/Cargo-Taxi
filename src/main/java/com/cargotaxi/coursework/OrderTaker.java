@@ -140,7 +140,8 @@ public class OrderTaker extends Human {
     public void saveOrderTaker() {
         try {
             FileWriter writer = new FileWriter("orderTakers.txt", true); // 'true' for append mode
-            writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() + " " + this.getOfficeAddress() + "\n");
+            writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() +
+                    " " + this.getOfficeAddress() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

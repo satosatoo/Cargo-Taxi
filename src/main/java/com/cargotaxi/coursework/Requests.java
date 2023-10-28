@@ -71,4 +71,3 @@ public class Requests {
         alert.showAndWait();
     }
 }
-

@@ -1,2 +1,4 @@
-0 asdfasfd Pushkina, 122 Ytsa, 62 1244.0 3110.0
-1 sdrfsdgf Ysdr, 123 Ifsd, 126 435.0 1087.5
+0 Fdsgdf Ads, Jasf, 125 Hns, Hfa, 63 346.0 865.0 true
+1 dfgdf Adg, Gsdg, 124 Adg, Gqwg, 14 346.0 865.0 true
+2 sdfgdsf Fas, GSds, 35 Fas, GSds, 865 679.0 1697.5 true
+3 dsfgsdf Das, Ogsd, 51 Das, Ogsd, 135 653.0 1632.5 true

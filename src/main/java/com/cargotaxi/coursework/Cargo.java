@@ -117,7 +117,8 @@ public class Cargo {
         try {
             FileWriter writer = new FileWriter("cargoes.txt", true); // 'true' for append mode
             writer.write(this.getCargoId() + " " + this.getCargoName() + " " + this.getCargoPickUp() +
-                    " " + this.getCargoDropOff() + " " + this.getWeight() + " " + this.getPrice() + "\n");
+                    " " + this.getCargoDropOff() + " " + this.getWeight() + " " + this.getPrice() +
+                    " " + this.getCargoStatusBoolean() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -133,14 +134,16 @@ public class Cargo {
                 String line = scanner.nextLine();
                 String[] data = line.split(" ");
 
-                if (data.length >= 8) {
+                if (data.length >= 9) {
                     String id = data[0];
                     String name = data[1];
                     String pickUp = data[2] + " " + data[3];
                     String dropOff = data[4] + " " + data[5];
                     String weight = data[6];
                     String price = data[7];
+                    String status = data[8];
                     Cargo newobj = new Cargo(name, pickUp, dropOff, weight, price);
+                    newobj.setCargoStatus(Boolean.parseBoolean(status));
                     Cargo.cargoList.add(newobj);
                 }
             }
@@ -163,10 +166,9 @@ public class Cargo {
     }
 
     public String showInfo() {
-        return ("Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPickUp() +
+        return ("Id: " + getCargoId() + " |~| Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPickUp() +
                 " |~| Arrival place: " + getCargoDropOff() + " |~| Weight: " + getWeight() +
-                " |~| Cargo status: " + getCargoStatusText() + " |~| Price: " + getPrice() +
-                " |~| Id: " + getCargoId());
+                " |~| Cargo status: " + getCargoStatusText() + " |~| Price: " + getPrice());
     }
     
     // Getters and setters
@@ -188,6 +190,6 @@ public class Cargo {
     public boolean getCargoStatusBoolean() {
         return this.cargoStatus;
     }
-    public void setCargoStatusOnTheWay() { this.cargoStatus = false; }
+    public void setCargoStatus(boolean boo) { this.cargoStatus = boo; }
     public static double getPricePerKg() { return pricePerKg; }
 }

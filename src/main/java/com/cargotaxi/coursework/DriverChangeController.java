@@ -47,11 +47,9 @@ public class DriverChangeController {
 
         // Отобразите диалоговое окно и дождитесь ответа пользователя
         Optional<ButtonType> result = confirmationAlert.showAndWait();
-
-        if (result.isPresent() && result.get() == okButton) {
-            int driverId = selectedDriver.getId();
+        int driverId = selectedDriver.getId();
+        if (result.isPresent() && result.get() == okButton && Driver.driverList.get(driverId).getDriverStatusBoolean()) {
             Driver.deleteDriver(driverId);
-
             Driver.deleteDriverFromFile(driverId);
 
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DriverListController.fxml")));

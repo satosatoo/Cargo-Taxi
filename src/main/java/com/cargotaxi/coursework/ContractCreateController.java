@@ -62,8 +62,10 @@ public class ContractCreateController implements Initializable {
 
         if (i == 4) {
             Contract contract = new Contract(cargo.getValue(), orderTaker.getValue(), driver.getValue(), selectedDate, delivery);
-            contract.cargoC.setCargoStatusOnTheWay();
-            contract.driverC.setDriverStatusBusy();
+            contract.cargoC.setCargoStatus(false);
+            Cargo.cargoList.get(contract.cargoC.getCargoId()).setCargoStatus(false);
+            contract.driverC.setDriverStatus(false);
+            Driver.driverList.get(contract.driverC.getId()).setDriverStatus(false);
             Contract.contractList.add(contract);
             contract.saveContract();
 

@@ -1,2 +1,1 @@
-0 Full Name +380123123123 Nissan 335042
-1 Asd Fasf 380112323123 Nissan 437889
+0 Fasd Osdf 380176154841 Suzuki 931019 false

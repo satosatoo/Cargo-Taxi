@@ -8,46 +8,46 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargotaxi.coursework.DriverCreateController">
+<AnchorPane prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargotaxi.coursework.DriverCreateController">
     <children>
-        <Button layoutX="280.0" layoutY="402.0" mnemonicParsing="false" onAction="#saveToList" prefHeight="43.0" prefWidth="150.0" text="Save">
+        <Button layoutX="340.0" layoutY="403.0" mnemonicParsing="false" onAction="#saveToList" prefHeight="43.0" prefWidth="150.0" text="Save">
             <font>
                 <Font name="Verdana" size="15.0" />
             </font>
         </Button>
-        <Button layoutX="50.0" layoutY="402.0" mnemonicParsing="false" onAction="#switchToCargo" prefHeight="43.0" prefWidth="150.0" text="Back">
+        <Button layoutX="110.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchToCargo" prefHeight="43.0" prefWidth="150.0" text="Back">
             <font>
                 <Font name="Verdana" size="15.0" />
             </font>
         </Button>
-        <Label layoutX="187.0" layoutY="50.0" text="Creation">
+        <Label layoutX="249.0" layoutY="49.0" text="Creation">
             <font>
                 <Font name="Verdana" size="24.0" />
             </font>
         </Label>
-        <Text layoutX="71.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full name">
+        <Text layoutX="110.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full name">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <Text layoutX="50.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number">
+        <Text layoutX="89.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <Text layoutX="62.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Car number">
+        <Text layoutX="101.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Car number">
             <font>
                 <Font name="Verdana" size="18.0" />
             </font>
         </Text>
-        <TextField fx:id="fullName" layoutX="238.0" layoutY="144.0" prefHeight="25.0" prefWidth="235.0" promptText="Full Name" />
-        <TextField fx:id="carNumber" disable="true" layoutX="238.0" layoutY="309.0" prefHeight="25.0" prefWidth="235.0" />
-        <TextField fx:id="phoneNumber" layoutX="238.0" layoutY="201.0" prefHeight="25.0" prefWidth="235.0" promptText="+380123456789" />
-      <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model of car">
+        <TextField fx:id="fullName" layoutX="277.0" layoutY="145.0" prefHeight="25.0" prefWidth="235.0" promptText="Full Name" />
+        <TextField fx:id="carNumber" disable="true" layoutX="277.0" layoutY="310.0" prefHeight="25.0" prefWidth="235.0" />
+        <TextField fx:id="phoneNumber" layoutX="277.0" layoutY="202.0" prefHeight="25.0" prefWidth="235.0" promptText="+380123456789" />
+      <Text layoutX="99.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model of car">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="carModel" layoutX="238.0" layoutY="257.0" prefHeight="25.0" prefWidth="235.0" />
+      <ChoiceBox fx:id="carModel" layoutX="277.0" layoutY="258.0" prefHeight="25.0" prefWidth="235.0" />
     </children>
 </AnchorPane>

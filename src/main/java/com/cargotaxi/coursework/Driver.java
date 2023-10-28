@@ -170,7 +170,8 @@ public class Driver extends Human {
     public void saveDriver() {
         try {
             FileWriter writer = new FileWriter("drivers.txt", true); // 'true' for append mode
-            writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() + " " + car.getCarModel() + " " + car.getCarNumber() + "\n");
+            writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() +
+                    " " + car.getCarModel() + " " + car.getCarNumber() + " " + this.getDriverStatusBoolean() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -186,13 +187,15 @@ public class Driver extends Human {
                 String line = scanner.nextLine();
                 String[] data = line.split(" ");
 
-                if (data.length >= 6) {
+                if (data.length >= 7) {
                     String id = data[0];
                     String name = data[1] + " " + data[2];
                     String phoneNumber = data[3];
                     String carModel = data[4];
                     String carNumber = data[5];
+                    String status = data[6];
                     Driver newobj = new Driver(name, phoneNumber, carModel, carNumber);
+                    newobj.setDriverStatus(Boolean.parseBoolean(status));
                     Driver.driverList.add(newobj);
                 }
             }
@@ -250,7 +253,7 @@ public class Driver extends Human {
     public void setCargoIdForDriver(int id) { this.cargoIdForDriver = id; }
     public int getCargoIdForDriver() { return this.cargoIdForDriver; }
     public int getId() { return personalID; }
-    public void setDriverStatusBusy() { this.driverStatus = false; }
+    public void setDriverStatus(boolean boo) { this.driverStatus = boo; }
     public boolean getDriverStatusBoolean() { return this.driverStatus; }
     public String getDriverStatusText() {
         if (driverStatus) { return "free"; }

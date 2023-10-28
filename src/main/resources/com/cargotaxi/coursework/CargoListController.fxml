@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargotaxi.coursework.CargoListController">
+<AnchorPane prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargotaxi.coursework.CargoListController">
     <children>
-        <Button layoutX="165.0" layoutY="402.0" mnemonicParsing="false" onAction="#switchToCargo" prefHeight="43.0" prefWidth="150.0" text="Back">
+        <Button layoutX="226.0" layoutY="402.0" mnemonicParsing="false" onAction="#switchToCargo" prefHeight="43.0" prefWidth="150.0" text="Back">
             <font>
                 <Font name="Verdana" size="15.0" />
             </font>
         </Button>
-        <ListView fx:id="listOfCargoes" layoutX="6.0" layoutY="63.0" prefHeight="320.0" prefWidth="467.0" />
-        <Label layoutX="152.0" layoutY="20.0" text="List of cargoes">
+        <ListView fx:id="listOfCargoes" layoutX="6.0" layoutY="63.0" prefHeight="320.0" prefWidth="589.0" />
+        <Label layoutX="213.0" layoutY="20.0" text="List of cargoes">
             <font>
                 <Font name="Verdana" size="24.0" />
             </font>
