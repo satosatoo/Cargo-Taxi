@@ -129,7 +129,7 @@ public class RequestsController implements Initializable {
 
         selectMonth.getItems().addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
-        List<String> years = Contract.getYearsFromData();
+        List<String> years = Cargo.getYearsFromData();
         selectYear.getItems().addAll(years);
     }
 }

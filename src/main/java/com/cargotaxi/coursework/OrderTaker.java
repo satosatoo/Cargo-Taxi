@@ -157,11 +157,11 @@ public class OrderTaker extends Human {
                 String line = scanner.nextLine();
                 String[] data = line.split(" ");
 
-                if (data.length >= 6) {
+                if (data.length >= 7) {
                     String id = data[0];
                     String name = data[1] + " " + data[2];
                     String phoneNumber = data[3];
-                    String officeAddress = data[4] + " " + data[5];
+                    String officeAddress = data[4] + " " + data[5] + " " + data[6];
                     OrderTaker newobj = new OrderTaker(name, phoneNumber, officeAddress);
                     OrderTaker.orderTakerList.add(newobj);
                 }

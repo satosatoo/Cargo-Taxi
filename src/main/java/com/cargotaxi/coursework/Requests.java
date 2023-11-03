@@ -10,7 +10,7 @@ public class Requests {
         int i = 0;
         double average = 0;
         for (Cargo cargo: Cargo.cargoList) {
-            LocalDate cargoDate = Objects.requireNonNull(Contract.findContractById(cargo.getCargoId())).getDeliveryDate();
+            LocalDate cargoDate = Objects.requireNonNull(Cargo.findCargoById(cargo.getCargoId())).getDeliveryDate();
             if (cargoDate.getMonth().name().equalsIgnoreCase(selectedMonth) && cargoDate.getYear() == Integer.parseInt(selectedYear)) {
                 sum += cargo.getPrice();
                 i++;
@@ -34,7 +34,7 @@ public class Requests {
         Cargo result = null;
         double heaviest = 0;
         for (Cargo cargo : Cargo.cargoList) {
-            LocalDate cargoDate = Objects.requireNonNull(Contract.findContractById(cargo.getCargoId())).getDeliveryDate();
+            LocalDate cargoDate = Objects.requireNonNull(Cargo.findCargoById(cargo.getCargoId())).getDeliveryDate();
             if (cargoDate.getMonth().name().equalsIgnoreCase(selectedMonth) && cargoDate.getYear() == Integer.parseInt(selectedYear)) {
                 if (cargo.getWeight() > heaviest) {
                     heaviest = cargo.getWeight();
@@ -58,8 +58,8 @@ public class Requests {
     public static void numOfCargoForSpecificDate(LocalDate specificDate) {
         int u = 0;
         LocalDate selectedDate = specificDate;
-        for (Contract cont: Contract.contractList) {
-            if (cont.getDeliveryDate().isEqual(selectedDate)) {
+        for (Cargo cargo: Cargo.cargoList) {
+            if (cargo.getDeliveryDate().isEqual(selectedDate)) {
                 u++;
             }
         }

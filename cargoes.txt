@@ -1,4 +1,1 @@
-0 Fdsgdf Ads, Jasf, 125 Hns, Hfa, 63 346.0 865.0 true
-1 dfgdf Adg, Gsdg, 124 Adg, Gqwg, 14 346.0 865.0 true
-2 sdfgdsf Fas, GSds, 35 Fas, GSds, 865 679.0 1697.5 true
-3 dsfgsdf Das, Ogsd, 51 Das, Ogsd, 135 653.0 1632.5 true
+0 furniture Fukuoka, Zasa, 55 Ohio, Ronto, 16 688.0 1720.0 true 2023-11-03 2023-11-04

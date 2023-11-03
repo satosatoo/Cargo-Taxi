@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -21,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -31,13 +29,7 @@ public class ContractCreateController implements Initializable {
     private Parent root;
 
     @FXML
-    private Text deliveryDate;
-
-    @FXML
     private ChoiceBox<Cargo> cargo;
-
-    @FXML
-    private DatePicker appointment;
 
     @FXML
     private ChoiceBox<Driver> driver;
@@ -51,17 +43,28 @@ public class ContractCreateController implements Initializable {
         // Check if any of the ChoiceBox selections are null
         if (cargo.getValue() != null) { i++; }
         else { Contract.errorCargo(); }
-        if (orderTaker.getValue() != null) {i++; }
+        if (orderTaker.getValue() != null) { i++; }
         else { Contract.errorOrderTaker(); }
-        if (driver.getValue() != null) {i++; }
+        if (driver.getValue() != null) { i++; }
         else { Contract.errorDriver(); }
 
-        LocalDate selectedDate = appointment.getValue();
-        if (selectedDate != null && !selectedDate.isBefore(LocalDate.now())) { i++; }
-        else { Contract.errorDate(); }
+        if (i == 3) {
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Create contract confirmation");
+            confirmationAlert.setHeaderText(null);
+            confirmationAlert.setContentText("Are you sure you want to create this contract?");
+
+            ButtonType okButton = new ButtonType("Create", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            confirmationAlert.getButtonTypes().setAll(okButton, cancelButton);
+
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+            if (result.isPresent() && result.get() == okButton) { i++; }
+        }
 
         if (i == 4) {
-            Contract contract = new Contract(cargo.getValue(), orderTaker.getValue(), driver.getValue(), selectedDate, delivery);
+            Contract contract = new Contract(cargo.getValue(), orderTaker.getValue(), driver.getValue());
             contract.cargoC.setCargoStatus(false);
             Cargo.cargoList.get(contract.cargoC.getCargoId()).setCargoStatus(false);
             contract.driverC.setDriverStatus(false);
@@ -86,18 +89,8 @@ public class ContractCreateController implements Initializable {
         stage.show();
     }
 
-    LocalDate delivery;
-
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appointment.setDayCellFactory(picker -> new DateCell() {
-            @Override
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                // Запрещает выбор дат, предшествующих сегодняшней дате
-                setDisable(date.isBefore(LocalDate.now()));
-            }
-        });
 
         // Create ObservableLists for each class
         ObservableList<OrderTaker> orderTakerList = FXCollections.observableArrayList(OrderTaker.orderTakerList);
@@ -160,13 +153,5 @@ public class ContractCreateController implements Initializable {
             }
         });
 
-        // Добавьте слушатель событий к DatePicker
-        appointment.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && !newValue.isBefore(LocalDate.now())) {
-                // Получите соответствующую дату доставки
-                delivery = Driver.deliveryTime(newValue, cargo.getValue().getWeight(), Driver.car.getLimit());
-                deliveryDate.setText(delivery.toString());
-            }
-        });
     }
 }

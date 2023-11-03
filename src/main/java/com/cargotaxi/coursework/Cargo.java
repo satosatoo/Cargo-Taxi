@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +21,11 @@ public class Cargo {
     private double price;
     private double weight;
     private boolean cargoStatus = true;
+    LocalDate appointment;
+    LocalDate deliveryDate;
     private static double pricePerKg = 2.5;
 
-    Cargo(String cargoName, String cargoFrom, String cargoTo, String weight, String price) {
+    Cargo(String cargoName, String cargoFrom, String cargoTo, String weight, String price, LocalDate appointment, LocalDate deliveryDate) {
         this.cargoName = cargoName;
         this.cargoPickUp = cargoFrom;
         this.cargoDropOff = cargoTo;
@@ -32,6 +35,8 @@ public class Cargo {
         }
         this.cargoID = Cargo.id++;
         this.price = Double.parseDouble(price);
+        this.appointment = appointment;
+        this.deliveryDate = deliveryDate;
         cargoPrice();
     }
 
@@ -84,11 +89,12 @@ public class Cargo {
         alert.showAndWait();
     }
 
-    public static void errorNothingEntered() {
+    public static void errorDate() {
+        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Fill in at least one line.");
+        alert.setContentText("To create you must select an appointment date.");
 
         alert.showAndWait();
     }
@@ -118,7 +124,7 @@ public class Cargo {
             FileWriter writer = new FileWriter("cargoes.txt", true); // 'true' for append mode
             writer.write(this.getCargoId() + " " + this.getCargoName() + " " + this.getCargoPickUp() +
                     " " + this.getCargoDropOff() + " " + this.getWeight() + " " + this.getPrice() +
-                    " " + this.getCargoStatusBoolean() + "\n");
+                    " " + this.getCargoStatusBoolean() + " " + this.getAppointment() + " " + this.getDeliveryDate() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -134,15 +140,17 @@ public class Cargo {
                 String line = scanner.nextLine();
                 String[] data = line.split(" ");
 
-                if (data.length >= 9) {
+                if (data.length >= 13) {
                     String id = data[0];
                     String name = data[1];
-                    String pickUp = data[2] + " " + data[3];
-                    String dropOff = data[4] + " " + data[5];
-                    String weight = data[6];
-                    String price = data[7];
-                    String status = data[8];
-                    Cargo newobj = new Cargo(name, pickUp, dropOff, weight, price);
+                    String pickUp = data[2] + " " + data[3] + " " + data[4];
+                    String dropOff = data[5] + " " + data[6] + " " + data[7];
+                    String weight = data[8];
+                    String price = data[9];
+                    String status = data[10];
+                    LocalDate appointment = LocalDate.parse(data[11]);
+                    LocalDate deliveryDate = LocalDate.parse(data[12]);
+                    Cargo newobj = new Cargo(name, pickUp, dropOff, weight, price, appointment, deliveryDate);
                     newobj.setCargoStatus(Boolean.parseBoolean(status));
                     Cargo.cargoList.add(newobj);
                 }
@@ -168,7 +176,19 @@ public class Cargo {
     public String showInfo() {
         return ("Id: " + getCargoId() + " |~| Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPickUp() +
                 " |~| Arrival place: " + getCargoDropOff() + " |~| Weight: " + getWeight() +
-                " |~| Cargo status: " + getCargoStatusText() + " |~| Price: " + getPrice());
+                " |~| Cargo status: " + getCargoStatusText() + " |~| Price: " + getPrice() +
+                "  |  Appointment: " + getAppointment() + "  |  Delivery date: " + getDeliveryDate());
+    }
+
+    public static List<String> getYearsFromData() {
+        List<String> years = new ArrayList<>();
+        for (Cargo cargo : Cargo.cargoList) {
+            String year = String.valueOf(cargo.getAppointment().getYear());
+            if (!years.contains(year)) {
+                years.add(year);
+            }
+        }
+        return years;
     }
     
     // Getters and setters
@@ -192,4 +212,8 @@ public class Cargo {
     }
     public void setCargoStatus(boolean boo) { this.cargoStatus = boo; }
     public static double getPricePerKg() { return pricePerKg; }
+    public LocalDate getAppointment() { return this.appointment; }
+    public void setAppointment(LocalDate date) { this.appointment = date; }
+    public LocalDate getDeliveryDate() { return this.deliveryDate; }
+    public void setDeliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; }
 }
