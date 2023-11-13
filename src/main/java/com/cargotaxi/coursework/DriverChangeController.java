@@ -33,19 +33,16 @@ public class DriverChangeController {
 
     @FXML
     void deleteDriver(ActionEvent event) throws IOException {
-        // Создайте диалоговое окно Alert с запросом подтверждения
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationAlert.setTitle("Delete Confirmation");
         confirmationAlert.setHeaderText(null);
         confirmationAlert.setContentText("Are you sure you want to delete this Driver?");
 
-        // Определите кнопки "OK" и "Cancel" в диалоговом окне
         ButtonType okButton = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         confirmationAlert.getButtonTypes().setAll(okButton, cancelButton);
 
-        // Отобразите диалоговое окно и дождитесь ответа пользователя
         Optional<ButtonType> result = confirmationAlert.showAndWait();
         int driverId = selectedDriver.getId();
         if (result.isPresent() && result.get() == okButton && Driver.driverList.get(driverId).getDriverStatusBoolean()) {
@@ -89,10 +86,10 @@ public class DriverChangeController {
     public void setDriver(Driver driver) {
         selectedDriver = driver;
         fullName.setText(driver.getFullName());
-        fullName.setDisable(true); // Запретите редактирование значения
+        fullName.setDisable(true);
         modelOfCar.setValue(driver.car.getCarModel());
-        modelOfCar.setDisable(true); // Запретите редактирование значения
+        modelOfCar.setDisable(true);
         carNumber.setText(driver.car.getCarNumber());
-        carNumber.setDisable(true); // Запретите редактирование значения
+        carNumber.setDisable(true);
     }
 }

@@ -10,10 +10,10 @@ abstract class Human {
         this.phoneNumber = phoneNumber;
     }
 
-    String showInfo() { return null; }
-    String getFullName() { return null; }
-    String getPhoneNumber() { return null; }
-    String getCompanyName() { return null; }
-    void setFullName(String fullName) {}
-    void setPhoneNumber(String phoneNumber) {}
+    public String showInfo() { return null; }
+    public String getFullName() { return null; }
+    public String getPhoneNumber() { return null; }
+    public String getCompanyName() { return null; }
+    public void setFullName(String fullName) {}
+    public void setPhoneNumber(String phoneNumber) {}
 }

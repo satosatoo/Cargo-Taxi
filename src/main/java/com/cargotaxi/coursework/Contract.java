@@ -71,6 +71,19 @@ public class Contract {
         }
     }
 
+    public static void rewriteContractFile() {
+        try {
+            FileWriter writer = new FileWriter("contracts.txt", false); // 'false' to overwrite the file
+            for (Contract contract : contractList) {
+                writer.write(contract.getContractId() + " " + contract.cargoC.getCargoId() +
+                        " " + contract.driverC.getId() + " " + contract.orderTakerC.getId() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void readContract() {
         try {
             File file = new File("contracts.txt");

@@ -121,11 +121,6 @@ public class OrderTaker extends Human {
             String city = matcher.group(1);
             String street = matcher.group(2);
             String streetNumber = matcher.group(3);
-
-            // Дальнейшая обработка city, street и streetNumber
-            // Например, можно добавить дополнительные проверки
-            // или возвратить true, если все условия выполняются.
-
             return true;
         } else {
             return false;
@@ -142,6 +137,19 @@ public class OrderTaker extends Human {
             FileWriter writer = new FileWriter("orderTakers.txt", true); // 'true' for append mode
             writer.write(this.getId() + " " + this.getFullName() + " " + this.getPhoneNumber() +
                     " " + this.getOfficeAddress() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void rewriteOrderTakerFile() {
+        try {
+            FileWriter writer = new FileWriter("orderTakers.txt", false); // 'false' to overwrite the file
+            for (OrderTaker orderTaker : orderTakerList) {
+                writer.write(orderTaker.getId() + " " + orderTaker.getFullName() + " " + orderTaker.getPhoneNumber() +
+                        " " + orderTaker.getOfficeAddress() + "\n");
+            }
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

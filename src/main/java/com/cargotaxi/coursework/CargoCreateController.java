@@ -105,25 +105,21 @@ public class CargoCreateController implements Initializable {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                // Запрещает выбор дат, предшествующих сегодняшней дате
+                // запрещает выбор дат, предшествующих сегодняшней дате
                 setDisable(date.isBefore(LocalDate.now()));
             }
         });
 
-        // Dodajte poslušalca dogodkov za DatePicker
         appointment.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isBefore(LocalDate.now())) {
                 if (weight.getText().isEmpty()) {
-                    // Display an error message if the weight field is empty
                     Cargo.errorWeight();
                 } else {
                     try {
                         double cargoWeight = Double.parseDouble(weight.getText());
-                        // Pridobite ustrezen datum dostave
-                        delivery = Driver.deliveryTime(newValue, cargoWeight, Driver.car.getLimit());
+                        delivery = Driver.deliveryTime(newValue, cargoWeight, Car.getLimit());
                         deliveryDate.setText(delivery.toString());
                     } catch (NumberFormatException e) {
-                        // Handle the case where the weight is not a valid number
                         Cargo.errorWeight();
                     }
                 }

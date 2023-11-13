@@ -75,7 +75,7 @@ public class DriverCreateController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        carNumber.setText(Driver.car.createUniqueCarNumber());
+        carNumber.setText(Car.createUniqueCarNumber());
         carModel.getItems().addAll("Nissan", "Mercedes", "Suzuki", "УАЗ");
     }
 }

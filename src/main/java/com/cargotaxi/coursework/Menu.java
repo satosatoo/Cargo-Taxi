@@ -22,6 +22,15 @@ public class Menu extends Application {
         } catch(Exception e) {
             e.printStackTrace();
         }
+
+        stage.setOnCloseRequest(event -> onClose());
+    }
+
+    private void onClose() {
+        Cargo.rewriteCargoFile();
+        Driver.rewriteDriverFile();
+        OrderTaker.rewriteOrderTakerFile();
+        Contract.rewriteContractFile();
     }
 
     public static void main(String[] args) {

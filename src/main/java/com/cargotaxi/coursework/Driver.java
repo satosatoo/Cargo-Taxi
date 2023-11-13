@@ -18,7 +18,7 @@ public class Driver extends Human {
     private boolean driverStatus = true;
     private int cargoIdForDriver;
     private double cargoWeightForDriver;
-    static Car car = new Car();
+    Car car = new Car();
 
     Driver(String fullName, String phoneNumber, String carModel, String carNumber) {
         super(fullName, phoneNumber);
@@ -115,34 +115,10 @@ public class Driver extends Human {
         return false;
     }
 
-    public static void deleteDriver(int id) {
-        Driver driverToRemove = null;
-        for (Driver driver : driverList) {
-            if (driver.getId() == id) {
-                driverToRemove = driver;
-                break;
-            }
-        }
-
-        if (driverToRemove != null) {
-            if (driverToRemove.getDriverStatusBoolean()) {
-                driverList.remove(driverToRemove);
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("The driver is currently busy and cannot be deleted.");
-                alert.showAndWait();
-            }
-        }
-    }
-
     public void setInfoFromContract(int cargoId, double cargoWeight) { 
         setCargoIdForDriver(cargoId);
         setCargoWeightForDriver(cargoWeight);
     }
-
-    public void ifDriverFreeThanNoCargoId() { this.cargoIdForDriver = 0; }
 
     public static LocalDate deliveryTime(LocalDate date, double weight, double limit) {
         double calc = weight / limit;
@@ -178,6 +154,19 @@ public class Driver extends Human {
         }
     }
 
+    public static void rewriteDriverFile() {
+        try {
+            FileWriter writer = new FileWriter("drivers.txt", false); // 'false' to overwrite the file
+            for (Driver driver : driverList) {
+                writer.write(driver.getId() + " " + driver.getFullName() + " " + driver.getPhoneNumber() +
+                        " " + driver.car.getCarModel() + " " + driver.car.getCarNumber() + " " + driver.getDriverStatusBoolean() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void readDriver() {
         try {
             File file = new File("drivers.txt");
@@ -201,6 +190,28 @@ public class Driver extends Human {
             }
             scanner.close();
         } catch (FileNotFoundException e) { e.printStackTrace(); }
+    }
+
+    public static void deleteDriver(int id) {
+        Driver driverToRemove = null;
+        for (Driver driver : driverList) {
+            if (driver.getId() == id) {
+                driverToRemove = driver;
+                break;
+            }
+        }
+
+        if (driverToRemove != null) {
+            if (driverToRemove.getDriverStatusBoolean()) {
+                driverList.remove(driverToRemove);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("The driver is currently busy and cannot be deleted.");
+                alert.showAndWait();
+            }
+        }
     }
 
     public static Driver findDriverById(int id) {

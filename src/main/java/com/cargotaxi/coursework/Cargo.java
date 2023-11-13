@@ -109,7 +109,6 @@ public class Cargo {
         return location.matches(regex);
     }
 
-    // Simple weight validation
     public static boolean isValidWeight(String weight) {
         try {
             double parsedWeight = Double.parseDouble(weight);
@@ -125,6 +124,20 @@ public class Cargo {
             writer.write(this.getCargoId() + " " + this.getCargoName() + " " + this.getCargoPickUp() +
                     " " + this.getCargoDropOff() + " " + this.getWeight() + " " + this.getPrice() +
                     " " + this.getCargoStatusBoolean() + " " + this.getAppointment() + " " + this.getDeliveryDate() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void rewriteCargoFile() {
+        try {
+            FileWriter writer = new FileWriter("cargoes.txt", false); // 'false' to overwrite the file
+            for (Cargo cargo : cargoList) {
+                writer.write(cargo.getCargoId() + " " + cargo.getCargoName() + " " + cargo.getCargoPickUp() +
+                        " " + cargo.getCargoDropOff() + " " + cargo.getWeight() + " " + cargo.getPrice() +
+                        " " + cargo.getCargoStatusBoolean() + " " + cargo.getAppointment() + " " + cargo.getDeliveryDate() + "\n");
+            }
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

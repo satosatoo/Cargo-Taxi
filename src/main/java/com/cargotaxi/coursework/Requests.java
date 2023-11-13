@@ -26,7 +26,7 @@ public class Requests {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(null);
-        alert.setContentText("The average cost of the service for " + selectedMonth + " " + selectedYear + ": " + average);
+        alert.setContentText("The average cost of the service for " + selectedMonth + " " + selectedYear + ": " + average + " $");
         alert.showAndWait();
     }
 
