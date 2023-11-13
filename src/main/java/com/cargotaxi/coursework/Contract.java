@@ -119,7 +119,9 @@ public class Contract {
 
     public String showInfo() {
         return ("Contract ID: " + getContractId() + "  |  Driver ID: " + driverC.getId() +
-                "  |  Order receiver ID: " + orderTakerC.getId() + "  |  Cargo ID: " + cargoC.getCargoId());
+                "  |  Driver name: " + driverC.getFullName() + "  |  Order taker ID: " + orderTakerC.getId() +
+                "  |  Order taker name: " + orderTakerC.getFullName() + "  |  Cargo ID: " + cargoC.getCargoId() +
+                "  |  Cargo name: " + cargoC.getCargoName());
     }
 
     public int getContractId() { return this.contractID; }

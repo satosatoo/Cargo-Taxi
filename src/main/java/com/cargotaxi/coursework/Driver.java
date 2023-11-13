@@ -67,15 +67,12 @@ public class Driver extends Human {
     }
 
     public static boolean isValidName(String input) {
-        // Разделяем строку на имя и фамилию
         String[] nameAndSurname = input.split(" ");
 
-        // Проверяем, что после разделения получены две непустые строки
         if (nameAndSurname.length != 2) {
             return false;
         }
 
-        // Проверяем, что есть хотя бы один пробел между именем и фамилией
         if (!input.contains(" ")) {
             return false;
         }
@@ -87,7 +84,6 @@ public class Driver extends Human {
             return false;
         }
 
-        // Проверка длины имени и фамилии
         if (name.length() < 2 || name.length() > 50) {
             return false;
         }
@@ -95,7 +91,6 @@ public class Driver extends Human {
             return false;
         }
 
-        // Проверка символов в имени и фамилии
         if (!name.matches("^[a-zA-Z'-]*$") || !surname.matches("^[a-zA-Z'-]*$")) {
             return false;
         }
@@ -129,6 +124,11 @@ public class Driver extends Human {
     public static boolean isNameAlreadyExists(String fullName) {
         for (Driver driver : driverList) {
             if (driver.getFullName().equalsIgnoreCase(fullName)) {
+                return true;
+            }
+        }
+        for (OrderTaker orderTaker : OrderTaker.orderTakerList) {
+            if (orderTaker.getFullName().equalsIgnoreCase(fullName)) {
                 return true;
             }
         }

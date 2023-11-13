@@ -187,9 +187,9 @@ public class Cargo {
     }
 
     public String showInfo() {
-        return ("Id: " + getCargoId() + " |~| Cargo name: " + getCargoName() + " |~| Place of departure: " + getCargoPickUp() +
-                " |~| Arrival place: " + getCargoDropOff() + " |~| Weight: " + getWeight() +
-                " |~| Cargo status: " + getCargoStatusText() + " |~| Price: " + getPrice() +
+        return ("Id: " + getCargoId() + "  |  Cargo name: " + getCargoName() + "  |  Place of departure: " + getCargoPickUp() +
+                "  |  Arrival place: " + getCargoDropOff() + "  |  Weight: " + getWeight() + "kg." +
+                "  |  Cargo status: " + getCargoStatusText() + "  |  Price: " + getPrice() + "$" +
                 "  |  Appointment: " + getAppointment() + "  |  Delivery date: " + getDeliveryDate());
     }
 

@@ -2,6 +2,8 @@ package com.cargotaxi.coursework;
 
 import javafx.scene.control.Alert;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Requests {
@@ -50,24 +52,39 @@ public class Requests {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(null);
-        alert.setContentText("The heaviest transportation in " + selectedMonth + " " + selectedYear + ": " + heaviest + " kg.\n" +
-                "Cargo name: " + result.getCargoName() + " | Cargo ID: " + result.getCargoId());
+        alert.setContentText("The heaviest transportation in " + selectedMonth + " " + selectedYear + ": " + heaviest + " kg.\n\n" +
+                result.showInfo());
         alert.showAndWait();
     }
 
     public static void numOfCargoForSpecificDate(LocalDate specificDate) {
         int u = 0;
+        List<Cargo> cargoes = new ArrayList<>();
         LocalDate selectedDate = specificDate;
         for (Cargo cargo: Cargo.cargoList) {
             if (cargo.getDeliveryDate().isEqual(selectedDate)) {
                 u++;
+                cargoes.add(cargo);
             }
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(null);
-        alert.setContentText("The number of clients to whom the service is assigned for the specified period: " + u);
+        alert.setContentText("The number of clients to whom the service is assigned for the specified period: " + u + "\n" + cargoesShow(cargoes));
         alert.showAndWait();
+    }
+
+    public static String cargoesShow(List<Cargo> cargoesAttr) {
+        String str = "";
+        for (Cargo cargo : cargoesAttr) {
+            str += "\n\nId: " + cargo.getCargoId() + "  |  Cargo name: " + cargo.getCargoName() +
+                    "  |  Place of departure: " + cargo.getCargoPickUp() +
+                    "  |  Arrival place: " + cargo.getCargoDropOff() + "  |  Weight: " + cargo.getWeight() + "kg." +
+                    "  |  Cargo status: " + cargo.getCargoStatusText() + "  |  Price: " + cargo.getPrice() + "$" +
+                    "  |  Appointment: " + cargo.getAppointment() + "  |  Delivery date: " + cargo.getDeliveryDate();
+
+        }
+        return str;
     }
 }

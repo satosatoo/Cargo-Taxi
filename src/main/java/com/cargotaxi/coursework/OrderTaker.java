@@ -24,67 +24,54 @@ public class OrderTaker extends Human {
     }
 
     public static void errorName() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Incorrect full name.");
-
         alert.showAndWait();
     }
 
     public static void errorPhoneNumber() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Wrong phone number.");
-
         alert.showAndWait();
     }
 
     public static void errorOfficeAddress() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Incorrect office address.");
-
         alert.showAndWait();
     }
 
     public static void errorNothingEntered() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Fill in at least one line.");
-
         alert.showAndWait();
     }
 
     public static boolean isValidName(String input) {
-        // Разделяем строку на имя и фамилию
         String[] nameAndSurname = input.split(" ");
 
-        // Проверяем, что после разделения получены две непустые строки
         if (nameAndSurname.length != 2) {
             return false;
         }
 
-        // Проверяем, что есть хотя бы один пробел между именем и фамилией
         if (!input.contains(" ")) {
             return false;
         }
 
         String name = nameAndSurname[0];
         String surname = nameAndSurname[1];
-        // Проверка регистра
         if (!Character.isUpperCase(name.charAt(0)) || !Character.isUpperCase(surname.charAt(0))) {
             return false;
         }
 
-        // Проверка длины имени и фамилии
         if (name.length() < 2 || name.length() > 50) {
             return false;
         }
@@ -92,12 +79,33 @@ public class OrderTaker extends Human {
             return false;
         }
 
-        // Проверка символов в имени и фамилии
         if (!name.matches("^[a-zA-Z'-]*$") || !surname.matches("^[a-zA-Z'-]*$")) {
             return false;
         }
 
         return true;
+    }
+
+    public static boolean isNameAlreadyExists(String fullName) {
+        for (OrderTaker orderTaker : orderTakerList) {
+            if (orderTaker.getFullName().equalsIgnoreCase(fullName)) {
+                return true;
+            }
+        }
+        for (Driver driver : Driver.driverList) {
+            if (driver.getFullName().equalsIgnoreCase(fullName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void errorNameExists() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("This name already exists. Please enter a different name.");
+        alert.showAndWait();
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
@@ -216,23 +224,6 @@ public class OrderTaker extends Human {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static boolean isNameAlreadyExists(String fullName) {
-        for (OrderTaker orderTaker : orderTakerList) {
-            if (orderTaker.getFullName().equalsIgnoreCase(fullName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static void errorNameExists() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This name already exists. Please enter a different name.");
-        alert.showAndWait();
     }
 
     @Override

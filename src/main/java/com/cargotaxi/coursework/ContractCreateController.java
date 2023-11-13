@@ -40,7 +40,6 @@ public class ContractCreateController implements Initializable {
     @FXML
     void saveToList(ActionEvent event) throws IOException {
         int i = 0;
-        // Check if any of the ChoiceBox selections are null
         if (cargo.getValue() != null) { i++; }
         else { Contract.errorCargo(); }
         if (orderTaker.getValue() != null) { i++; }
@@ -91,8 +90,6 @@ public class ContractCreateController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        // Create ObservableLists for each class
         ObservableList<OrderTaker> orderTakerList = FXCollections.observableArrayList(OrderTaker.orderTakerList);
         ObservableList<Cargo> cargoList = FXCollections.observableArrayList(
                 Cargo.cargoList
@@ -108,12 +105,10 @@ public class ContractCreateController implements Initializable {
                         .collect(Collectors.toList())
         );
 
-        // Set the items for each ChoiceBox
         cargo.setItems(cargoList);
         orderTaker.setItems(orderTakerList);
         driver.setItems(driverList);
 
-        // Customize the display of items in the ChoiceBoxes using a StringConverter
         orderTaker.setConverter(new StringConverter<OrderTaker>() {
             @Override
             public String toString(OrderTaker object) {

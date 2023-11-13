@@ -118,17 +118,11 @@ public class RequestsController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        specificDate.setDayCellFactory(picker -> new DateCell() {
-            @Override
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                // Disallow selection of dates before today
-                setDisable(date.isBefore(LocalDate.now()));
-            }
-        });
 
+        selectMonth = new ComboBox<>();
         selectMonth.getItems().addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
+        selectYear = new ComboBox<>();
         List<String> years = Cargo.getYearsFromData();
         selectYear.getItems().addAll(years);
     }
