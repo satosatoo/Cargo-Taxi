@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Driver extends Human {
     public static List<Driver> driverList = new ArrayList<>();
-    static int id;
+    static int id = 1;
     final int personalID;
     private boolean driverStatus = true;
     private int cargoIdForDriver;
@@ -31,38 +31,39 @@ public class Driver extends Human {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Incorrect full name.");
-
+        alert.setContentText("Incorrect full name. The first and last name must be capitalized and at least 2 letters.");
         alert.showAndWait();
     }
 
     public static void errorPhoneNumber() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Wrong phone number.");
-
+        alert.setContentText("Wrong phone number. The phone number must start with 380 or +380 and be 12 digits long.");
         alert.showAndWait();
     }
 
     public static void errorNothingEntered() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Fill in at least one line.");
-
         alert.showAndWait();
     }
 
     public static void errorChooseCarModel() {
-        // Display an error message
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("You need to select a car model.");
+        alert.showAndWait();
+    }
 
+    public static void errorDeleteDriver() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("You cannot remove a driver if he is busy.");
         alert.showAndWait();
     }
 
@@ -133,6 +134,28 @@ public class Driver extends Human {
             }
         }
         return false;
+    }
+
+    public static boolean isPhoneNumberAlreadyExists(String phoneNumber) {
+        for (Driver driver : driverList) {
+            if (driver.getPhoneNumber().equalsIgnoreCase(phoneNumber)) {
+                return true;
+            }
+        }
+        for (OrderTaker orderTaker : OrderTaker.orderTakerList) {
+            if (orderTaker.getPhoneNumber().equalsIgnoreCase(phoneNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void errorPhoneNumberExists() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("This phone number already exists. Please enter a different phone number.");
+        alert.showAndWait();
     }
 
     public static void errorNameExists() {

@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Cargo {
     public static List<Cargo> cargoList = new ArrayList<>();
-    static int id;
+    static int id = 1;
     private final int cargoID;
     private String cargoName;
     private String cargoPickUp;
@@ -55,7 +55,7 @@ public class Cargo {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Incorrect pick up location.");
+        alert.setContentText("Incorrect pick up location. There must first be the name of the city, then the name of the street and then the street number, everything must be separated by a comma.");
 
         alert.showAndWait();
     }
@@ -65,7 +65,7 @@ public class Cargo {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Incorrect drop off location.");
+        alert.setContentText("Incorrect drop off location. There must first be the name of the city, then the name of the street and then the street number, everything must be separated by a comma.");
 
         alert.showAndWait();
     }
@@ -75,7 +75,7 @@ public class Cargo {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Wrong weight.");
+        alert.setContentText("Wrong weight. The weight of the cargo must be at least 100 kg.");
 
         alert.showAndWait();
     }

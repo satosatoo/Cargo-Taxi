@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class OrderTaker extends Human {
     public static List<OrderTaker> orderTakerList = new ArrayList<>();
-    static int id;
+    static int id = 1;
     final private int personalID;
     private String officeAddress;
 
@@ -27,7 +27,7 @@ public class OrderTaker extends Human {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Incorrect full name.");
+        alert.setContentText("Incorrect full name. The first and last name must be capitalized and at least 2 letters.");
         alert.showAndWait();
     }
 
@@ -35,7 +35,7 @@ public class OrderTaker extends Human {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Wrong phone number.");
+        alert.setContentText("Wrong phone number. The phone number must start with 380 or +380 and be 12 digits long.");
         alert.showAndWait();
     }
 
@@ -43,7 +43,7 @@ public class OrderTaker extends Human {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Incorrect office address.");
+        alert.setContentText("Incorrect office address. There must first be the name of the city, then the name of the street and then the street number, everything must be separated by a comma.");
         alert.showAndWait();
     }
 
@@ -105,6 +105,14 @@ public class OrderTaker extends Human {
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("This name already exists. Please enter a different name.");
+        alert.showAndWait();
+    }
+
+    public static void errorPhoneNumberExists() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("This phone number already exists. Please enter a different phone number.");
         alert.showAndWait();
     }
 

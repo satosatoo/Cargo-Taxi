@@ -54,6 +54,8 @@ public class DriverChangeController {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+        } else {
+            Driver.errorDeleteDriver();
         }
     }
 

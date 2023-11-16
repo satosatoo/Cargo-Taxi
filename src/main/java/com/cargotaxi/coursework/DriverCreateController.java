@@ -46,7 +46,13 @@ public class DriverCreateController implements Initializable {
             }
         }
         else { Driver.errorName(); }
-        if (Driver.isValidPhoneNumber(phoneNumber.getText())) { i++; }
+        if (Driver.isValidPhoneNumber(phoneNumber.getText())) {
+            if (!Driver.isPhoneNumberAlreadyExists(phoneNumber.getText())) {
+                i++;
+            } else {
+                Driver.errorPhoneNumberExists();
+            }
+        }
         else { Driver.errorPhoneNumber(); }
         if (carModel.getValue() != null) { i++; }
         else { Driver.errorChooseCarModel(); }

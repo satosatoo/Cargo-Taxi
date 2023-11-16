@@ -40,7 +40,13 @@ public class OrderTakerCreateController {
             }
         }
         else { OrderTaker.errorName(); }
-        if (OrderTaker.isValidPhoneNumber(phoneNumber.getText())) { i++; }
+        if (OrderTaker.isValidPhoneNumber(phoneNumber.getText())) {
+            if (!Driver.isPhoneNumberAlreadyExists(phoneNumber.getText())) {
+                i++;
+            } else {
+                Driver.errorPhoneNumberExists();
+            }
+        }
         else { OrderTaker.errorPhoneNumber(); }
         if (OrderTaker.isValidAddress(officeAddress.getText())) { i++; }
         else { OrderTaker.errorOfficeAddress(); }

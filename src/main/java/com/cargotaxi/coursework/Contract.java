@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Contract {
-    static int id;
+    static int id = 1;
     public final int contractID;
     Cargo cargoC;
     OrderTaker orderTakerC;

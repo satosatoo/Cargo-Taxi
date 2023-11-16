@@ -118,11 +118,8 @@ public class RequestsController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        selectMonth = new ComboBox<>();
         selectMonth.getItems().addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
-        selectYear = new ComboBox<>();
         List<String> years = Cargo.getYearsFromData();
         selectYear.getItems().addAll(years);
     }
